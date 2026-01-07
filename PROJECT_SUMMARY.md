@@ -212,7 +212,7 @@ smart-flow/
 ### 安装
 
 ```bash
-cd ~/.claude/skills
+cd ~/.claude/plugins
 git clone https://github.com/YOUR-USERNAME/smart-flow.git
 ```
 

@@ -26,7 +26,7 @@ This allows the same `.sh` scripts to work on both Unix and Windows systems.
 
 ```bash
 # Using Git Bash
-cd ~/.claude/skills
+cd ~/.claude/plugins
 git clone https://github.com/YOUR-USERNAME/smart-flow.git
 ```
 
@@ -46,14 +46,14 @@ In Claude Code:
 **1. Clone Smart Flow**
 
 ```cmd
-cd C:\Users\YourName\.claude\skills
+cd C:\Users\YourName\.claude\plugins
 git clone https://github.com/YOUR-USERNAME/smart-flow.git
 ```
 
 **2. Run Installation Hook**
 
 ```cmd
-cd C:\Users\YourName\.claude\skills\smart-flow\hooks
+cd C:\Users\YourName\.claude\plugins\smart-flow\hooks
 run-hook.cmd install.sh
 ```
 
@@ -111,7 +111,7 @@ On Windows, paths will be:
 1. Right-click on Git Bash → "Run as Administrator"
 2. Or adjust Git Bash permissions:
    ```bash
-   chmod +x ~/.claude/skills/smart-flow/hooks/*.sh
+   chmod +x ~/.claude/plugins/smart-flow/hooks/*.sh
    ```
 
 ### Path Too Long

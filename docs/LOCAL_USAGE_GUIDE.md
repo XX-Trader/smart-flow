@@ -25,14 +25,14 @@ claude --version
 ```bash
 # 使用 Git Bash 或 PowerShell
 # 创建目标目录（如果不存在）
-mkdir -p ~/.claude/skills
+mkdir -p ~/.claude/plugins
 
 # 复制插件
-cp -r "d:/学习资料/量化交易/大白文件2021.5.31/CoinGod_Web/smart-flow" ~/.claude/skills/
+cp -r "d:/学习资料/量化交易/大白文件2021.5.31/CoinGod_Web/smart-flow" ~/.claude/plugins/
 ```
 
 或者使用 Windows 资源管理器：
-1. 打开 `C:\Users\你的用户名\.claude\skills\`
+1. 打开 `C:\Users\你的用户名\.claude\plugins\`
 2. 如果不存在，创建该目录
 3. 将 `smart-flow` 文件夹复制到该目录
 
@@ -40,10 +40,10 @@ cp -r "d:/学习资料/量化交易/大白文件2021.5.31/CoinGod_Web/smart-flow
 
 ```bash
 # 创建目标目录
-mkdir -p ~/.claude/skills
+mkdir -p ~/.claude/plugins
 
 # 复制插件
-cp -r smart-flow ~/.claude/skills/
+cp -r smart-flow ~/.claude/plugins/
 ```
 
 ### 步骤 3: 配置 Claude Code
@@ -304,22 +304,22 @@ Smart Flow: 历史执行记录:
 
 你可以添加自定义 Agent 配置：
 
-1. 编辑 `~/.claude/skills/smart-flow/agents/core/my-agent.md`
+1. 编辑 `~/.claude/plugins/smart-flow/agents/core/my-agent.md`
 2. 在 `task-decomposer` 中添加映射规则
 
 ## ⚙️ 配置选项
 
 ### 修改触发关键词
 
-编辑 `~/.claude/skills/smart-flow/skills/smart-workflow/SKILL.md`，修改触发条件部分。
+编辑 `~/.claude/plugins/smart-flow/skills/smart-workflow/SKILL.md`，修改触发条件部分。
 
 ### 修改 Agent 数量
 
-编辑 `~/.claude/skills/smart-flow/skills/task-decomposer/SKILL.md`，添加/删除 Agent 映射。
+编辑 `~/.claude/plugins/smart-flow/skills/task-decomposer/SKILL.md`，添加/删除 Agent 映射。
 
 ### 修改并行度
 
-编辑 `~/.claude/skills/smart-flow/skills/parallel-executor/SKILL.md`，修改 `MAX_CONCURRENT_AGENTS`。
+编辑 `~/.claude/plugins/smart-flow/skills/parallel-executor/SKILL.md`，修改 `MAX_CONCURRENT_AGENTS`。
 
 ## 🐛 故障排除
 

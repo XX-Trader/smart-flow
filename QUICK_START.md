@@ -13,26 +13,26 @@
 ```powershell
 # PowerShell 命令
 # 创建目标目录
-New-Item -ItemType Directory -Force -Path "$env:USERPROFILE\.claude\skills"
+New-Item -ItemType Directory -Force -Path "$env:USERPROFILE\.claude\plugins"
 
 # 复制插件
-Copy-Item -Path "d:\学习资料\量化交易\大白文件2021.5.31\CoinGod_Web\smart-flow" -Destination "$env:USERPROFILE\.claude\skills\" -Recurse -Force
+Copy-Item -Path "d:\学习资料\量化交易\大白文件2021.5.31\CoinGod_Web\smart-flow" -Destination "$env:USERPROFILE\.claude\plugins\" -Recurse -Force
 
 # 验证安装
-Get-ChildItem "$env:USERPROFILE\.claude\skills\smart-flow\skills"
+Get-ChildItem "$env:USERPROFILE\.claude\plugins\smart-flow\skills"
 ```
 
 或使用 **Git Bash**：
 
 ```bash
 # 创建目录
-mkdir -p ~/.claude/skills
+mkdir -p ~/.claude/plugins
 
 # 复制插件
-cp -r "/d/学习资料/量化交易/大白文件2021.5.31/CoinGod_Web/smart-flow" ~/.claude/skills/
+cp -r "/d/学习资料/量化交易/大白文件2021.5.31/CoinGod_Web/smart-flow" ~/.claude/plugins/
 
 # 验证
-ls ~/.claude/skills/smart-flow/skills
+ls ~/.claude/plugins/smart-flow/skills
 ```
 
 #### 步骤 2: 配置 Claude Code
@@ -89,8 +89,8 @@ claude
 
 ```bash
 # 1. 复制插件
-mkdir -p ~/.claude/skills
-cp -r smart-flow ~/.claude/skills/
+mkdir -p ~/.claude/plugins
+cp -r smart-flow ~/.claude/plugins/
 
 # 2. 配置（如果文件不存在则创建）
 cat >> ~/.claude/CLAUDE.md << 'EOF'
@@ -104,7 +104,7 @@ You have Smart Flow installed. Use smart-flow skills for intelligent task orches
 EOF
 
 # 3. 验证
-ls ~/.claude/skills/smart-flow/skills
+ls ~/.claude/plugins/smart-flow/skills
 ```
 
 ## 🚀 立即使用
@@ -126,7 +126,7 @@ Smart Flow 会：
 
 安装成功的标志：
 
-- [ ] `~/.claude/skills/smart-flow/` 目录存在
+- [ ] `~/.claude/plugins/smart-flow/` 目录存在
 - [ ] 其下有 `skills/` 目录，包含 5 个技能文件夹
 - [ ] `~/.claude/CLAUDE.md` 包含 Smart Flow 配置
 - [ ] Claude Code 中输入 `/smart-flow` 能触发

@@ -11,8 +11,8 @@
 ### 方式 1: Git Clone (推荐)
 
 ```bash
-# 1. 进入 Claude Code 技能目录
-cd ~/.claude/skills
+# 1. 进入 Claude Code 插件目录
+cd ~/.claude/plugins
 
 # 2. 克隆 Smart Flow 插件
 git clone https://github.com/YOUR-USERNAME/smart-flow.git
@@ -33,8 +33,8 @@ ls smart-flow/skills
 # 1. 下载插件
 # 从 GitHub Releases 下载 smart-flow-v1.0.0.zip
 
-# 2. 解压到技能目录
-cd ~/.claude/skills
+# 2. 解压到插件目录
+cd ~/.claude/plugins
 unzip smart-flow-v1.0.0.zip
 ```
 
@@ -99,11 +99,11 @@ Smart Flow will automatically trigger when:
 
 ## 验证安装
 
-### 测试 1: 检查技能文件
+### 测试 1: 检查插件文件
 
 ```bash
-# 检查技能文件是否存在
-ls -la ~/.claude/skills/smart-flow/skills/
+# 检查插件文件是否存在
+ls -la ~/.claude/plugins/smart-flow/skills/
 
 # 应该看到:
 # smart-workflow/
@@ -117,7 +117,7 @@ ls -la ~/.claude/skills/smart-flow/skills/
 
 ```bash
 # 查看主技能文件
-cat ~/.claude/skills/smart-flow/skills/smart-workflow/SKILL.md
+cat ~/.claude/plugins/smart-flow/skills/smart-workflow/SKILL.md
 
 # 应该看到完整的技能定义
 ```
@@ -141,7 +141,7 @@ Smart Flow: 启动智能任务调度流程...
 
 ```bash
 # 删除插件目录
-rm -rf ~/.claude/skills/smart-flow
+rm -rf ~/.claude/plugins/smart-flow
 
 # 从 CLAUDE.md 中删除 Smart Flow 配置
 nano ~/.claude/CLAUDE.md
@@ -152,7 +152,7 @@ nano ~/.claude/CLAUDE.md
 
 ```bash
 # 进入插件目录
-cd ~/.claude/skills/smart-flow
+cd ~/.claude/plugins/smart-flow
 
 # 拉取最新代码
 git pull origin main

@@ -17,7 +17,7 @@ Fetch and follow instructions from https://raw.githubusercontent.com/YOUR-USERNA
 **1. Clone Smart Flow repository:**
 
 ```bash
-cd ~/.claude/skills
+cd ~/.claude/plugins
 git clone https://github.com/YOUR-USERNAME/smart-flow.git
 ```
 
@@ -26,7 +26,7 @@ git clone https://github.com/YOUR-USERNAME/smart-flow.git
 Check that skills are loaded:
 
 ```bash
-ls ~/.claude/skills/smart-flow/skills/
+ls ~/.claude/plugins/smart-flow/skills/
 ```
 
 Should see:
@@ -83,13 +83,13 @@ Smart Flow: 启动智能任务调度流程...
 To initialize Smart Flow for the current session:
 
 ```
-Run: ~/.claude/skills/smart-flow/hooks/bootstrap.sh
+Run: ~/.claude/plugins/smart-flow/hooks/bootstrap.sh
 ```
 
 Or on Windows:
 
 ```
-Run: C:\Users\YourName\.claude\skills\smart-flow\hooks\run-hook.cmd bootstrap.sh
+Run: C:\Users\YourName\.claude\plugins\smart-flow\hooks\run-hook.cmd bootstrap.sh
 ```
 
 ## Update
@@ -97,7 +97,7 @@ Run: C:\Users\YourName\.claude\skills\smart-flow\hooks\run-hook.cmd bootstrap.sh
 To update Smart Flow to the latest version:
 
 ```bash
-cd ~/.claude/skills/smart-flow
+cd ~/.claude/plugins/smart-flow
 git pull origin main
 ```
 
@@ -105,7 +105,7 @@ git pull origin main
 
 ```bash
 # Remove Smart Flow
-rm -rf ~/.claude/skills/smart-flow
+rm -rf ~/.claude/plugins/smart-flow
 
 # Remove Smart Flow section from ~/.claude/CLAUDE.md
 ```

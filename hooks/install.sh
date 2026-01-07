@@ -32,21 +32,21 @@ if [ "$PLATFORM" = "claude-code" ]; then
     echo ""
     echo "📦 Installing for Claude Code..."
 
-    # Claude Code uses ~/.claude/skills/ directory
-    SKILLS_DIR="$HOME/.claude/skills"
+    # Claude Code uses ~/.claude/plugins/ directory
+    PLUGINS_DIR="$HOME/.claude/plugins"
 
     # Create directory if it doesn't exist
-    mkdir -p "$SKILLS_DIR"
+    mkdir -p "$PLUGINS_DIR"
 
-    # Copy Smart Flow to skills directory
-    if [ -d "$SKILLS_DIR/smart-flow" ]; then
+    # Copy Smart Flow to plugins directory
+    if [ -d "$PLUGINS_DIR/smart-flow" ]; then
         echo "⚠️  Smart Flow already exists. Updating..."
-        rm -rf "$SKILLS_DIR/smart-flow"
+        rm -rf "$PLUGINS_DIR/smart-flow"
     fi
 
-    cp -r "$SMART_FLOW_DIR" "$SKILLS_DIR/smart-flow"
+    cp -r "$SMART_FLOW_DIR" "$PLUGINS_DIR/smart-flow"
 
-    echo "✅ Installed to: $SKILLS_DIR/smart-flow"
+    echo "✅ Installed to: $PLUGINS_DIR/smart-flow"
 
     # Configure CLAUDE.md
     CLAUDE_MD="$HOME/.claude/CLAUDE.md"

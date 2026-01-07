@@ -47,7 +47,7 @@ Smart Flow 是一个全自动化的开发工作流插件，通过**需求澄清�
 
 ```bash
 # 1. 克隆插件
-cd ~/.claude/skills
+cd ~/.claude/plugins
 git clone https://github.com/YOUR-USERNAME/smart-flow.git
 
 # 2. 配置 Claude Code
