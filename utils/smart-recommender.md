@@ -210,7 +210,7 @@ def recommend_parallel_count(complexity_score):
   数据复杂度: 简单 CRUD
   用户规模: 小 (个人)
 
-复杂度分数: 18/100
+复杂度分数: 23/100
 任务类型: 简单
 
 推荐方案:
