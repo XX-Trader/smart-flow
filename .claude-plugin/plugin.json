@@ -16,29 +16,5 @@
     "requirements-clarity",
     "parallel-execution",
     "smart-flow"
-  ],
-  "skills": [
-    "smart-flow:smart-workflow",
-    "smart-flow:requirements-clarity",
-    "smart-flow:task-decomposer",
-    "smart-flow:parallel-executor",
-    "smart-flow:result-synthesizer"
-  ],
-  "commands": [
-    {
-      "name": "/smart-flow",
-      "description": "启动智能任务调度流程"
-    },
-    {
-      "name": "/sf",
-      "description": "智能任务调度快捷命令"
-    }
-  ],
-  "capabilities": [
-    "auto-requirements-clarification",
-    "multi-agent-parallel-execution",
-    "task-decomposition",
-    "result-synthesis",
-    "support-67-agents"
   ]
 }
