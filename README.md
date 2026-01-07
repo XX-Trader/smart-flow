@@ -1,11 +1,29 @@
-# Smart Flow - Claude Code 智能任务调度插件
+# Smart Flow - Claude Code 智能任务调度插件 v2.0
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Claude Code](https://img.shields.io/badge/Claude_Code-Plugin-blue.svg)](https://claude.com/claude-code)
+[![Version](https://img.shields.io/badge/Version-2.0.0-green.svg)](https://github.com/XX-Trader/smart-flow)
+[![Agents](https://img.shields.io/badge/Agents-122+-blue.svg)](https://github.com/XX-Trader/smart-flow)
+[![Skills](https://img.shields.io/badge/Skills-132+-purple.svg)](https://github.com/XX-Trader/smart-flow)
 
 > "先搞清楚要做什么，再找合适的专家同时开工"
 
-Smart Flow 是一个全自动化的开发工作流插件，通过**需求澄清、任务分解、并行执行、结果整合**四大阶段，大幅提升 Claude Code 的开发效率。
+**Smart Flow v2.0 全量整合版** - 一个全自动化的开发工作流插件，整合了 **122+ 专业 Agent**、**132+ 技能**、**11+ 斜杠命令**，通过**需求澄清、任务分解、并行执行、结果整合**四大阶段，大幅提升 Claude Code 的开发效率。
+
+## 🎉 v2.0.0 重大更新
+
+### ✨ 全量整合
+- ✅ **122 个专业 Agent**: 涵盖开发、测试、部署、研究等所有领域
+- ✅ **132 个技能**: 包括工作流、文档处理、设计创意、AI 应用等
+- ✅ **11 个斜杠命令**: 快捷操作，提升效率
+- ✅ **按需加载**: 所有资源按需加载，不影响性能
+- ✅ **统一索引**: 完整的 [UNIFIED_INDEX.md](UNIFIED_INDEX.md) 方便查找
+
+### 📦 资源来源
+- **Smart Flow 核心**: 5 个工作流技能
+- **用户自定义**: 50 个实用技能（feature-development、auto-fix、db-deploy 等）
+- **Superpowers**: 14 个工作流最佳实践技能
+- **官方插件**: 68 个文档处理、设计创意技能
 
 ## ✨ 核心特性
 
@@ -17,7 +35,7 @@ Smart Flow 是一个全自动化的开发工作流插件，通过**需求澄清�
 
 ### ⚡ 并行加速
 同时调用多个专业 Agent，10x 提升效率
-- 支持 40+ 专业 Agent
+- 支持 122+ 专业 Agent
 - 智能依赖关系识别
 - 自动并行调度
 
@@ -30,6 +48,7 @@ Smart Flow 是一个全自动化的开发工作流插件，通过**需求澄清�
 - 前端/后端开发
 - 测试工程师
 - 安全专家
+- 部署工程师
 - ... 更多专业领域
 
 ### 📊 智能整合
