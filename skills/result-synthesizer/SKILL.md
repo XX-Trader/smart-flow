@@ -1,15 +1,17 @@
 ---
 name: result-synthesizer
-description: "Use when all agents have completed execution. Synthesizes all outputs into a comprehensive report, then guides through testing, deployment, and feedback loop."
+description: "Use when all agents have completed execution. Synthesizes all outputs into a comprehensive report, then guides through testing-modification loop until bug-free, then deployment."
 ---
 
 # Result Synthesizer - 结果整合器
 
 ## 概述
 
-**核心原则**: 闭环开发流程 - 整合 → 测试 → 部署 → 反馈
+**核心原则**: 闭环开发流程 - 整合 → **测试循环(直到无bug)** → 部署上线
 
-收集所有专业 agent 的输出，按维度整合生成报告，然后引导用户完成**测试、部署和反馈修改**的完整闭环。
+收集所有专业 agent 的输出，按维度整合生成报告，然后引导用户完成**测试、修改、再测试的循环**，确保代码完全没问题后才部署上线。
+
+**重要**: 部署后的测试和反馈不在本系统考虑范围内（那是运维阶段）。
 
 ## 输入
 
@@ -30,15 +32,19 @@ graph LR
     D -->|是| E[执行测试]
     D -->|否| F{是否需要部署?}
     E --> G{测试通过?}
-    G -->|是| F
-    G -->|否| H[进入修改流程]
-    H --> I[定位问题]
-    I --> J[执行修改]
-    J --> E
-    F -->|是| K[执行部署]
-    F -->|否| L[流程结束]
-    K --> M[部署完成]
+    G -->|是| H{确认无问题?}
+    G -->|否| I[进入修改流程]
+    I --> J[定位问题]
+    J --> K[执行修改]
+    K --> E
+    H -->|是| F
+    H -->|否| E
+    F -->|是| L[执行部署]
+    F -->|否| M[流程结束]
+    L --> N[部署完成]
 ```
+
+**核心原则**: 测试和修改在部署前完成,确保代码无问题后才部署。部署后的测试和反馈不在本系统考虑范围内。
 
 ---
 
@@ -289,21 +295,26 @@ Task({
 - 单元测试: ✅ 15/15 通过
 - 集成测试: ✅ 8/8 通过
 - 测试覆盖率: 85%
-
-下一步: 部署上线
 ```
 
-**询问是否部署**:
+**确认无问题后再部署**:
 
 ```python
 ask_user(
-    "✅ 测试通过！是否需要部署？",
+    "✅ 测试通过！确认代码完全没有问题了吗？",
     options=[
-        "立即部署",
-        "稍后部署",
+        "确认无问题，进入部署",
+        "还需要再测试一轮",
         "暂不部署"
     ]
 )
+
+if user_choice == "确认无问题，进入部署":
+    ask_about_deployment()
+elif user_choice == "还需要再测试一轮":
+    rerun_tests()
+else:  # 暂不部署
+    end_flow()
 ```
 
 **测试失败**:
@@ -430,10 +441,26 @@ rerun_tests()
 
 # 检查测试结果
 if tests_passed():
-    ask_about_deployment()
+    # 测试通过后，再次确认用户是否满意
+    ask_user(
+        "✅ 修改后测试通过！确认代码完全没问题了吗？",
+        options=[
+            "确认无问题，进入部署",
+            "还需要再测试一轮"
+        ]
+)
 else:
     # 如果还是失败，继续修改循环
-    enter_fix_loop()
+    if current_fix_attempt < MAX_FIX_ATTEMPTS:
+        ask_user(
+            f"修改尝试 {current_fix_attempt}/{MAX_FIX_ATTEMPTS} 完成，但测试仍未通过",
+            options=[
+                "继续自动修改",
+                "手动介入"
+            ]
+        )
+    else:
+        print("⚠️ 已达到最大修改次数，建议手动介入")
 ```
 
 ---
@@ -552,8 +579,11 @@ A: 立即修改
   3. 重新运行测试
   4. ✅ 测试通过
 
+Q: 确认代码完全没问题了吗?
+A: 确认无问题，进入部署
+
 ### Phase 5: 部署上线 (20%)
-Q: 是否需要部署?
+Q: 需要部署到哪个环境?
 A: 测试环境部署
 
 🔄 执行 db-deploy
@@ -563,6 +593,12 @@ A: 测试环境部署
 
 ### 完成
 🎉 Smart Flow 完整闭环完成！
+
+**流程特点**:
+- ✅ 测试和修改循环在部署前完成
+- ✅ 确认无问题后才部署
+- ✅ 部署是最后的步骤
+- ✅ 部署后的测试和反馈不在本系统范围内
 ```
 
 ---
@@ -607,11 +643,15 @@ ask_user(
     f"修改尝试 {current_fix_attempt}/{MAX_FIX_ATTEMPTS} 完成",
     options=[
         "继续修改",
-        "手动介入",
-        "放弃测试，直接部署"
+        "手动介入"
     ]
 )
 ```
+
+**重要**:
+- 不提供"跳过测试直接部署"选项
+- 必须确保测试通过后才能部署
+- 部署是最后的步骤，在部署前要确认所有问题都已解决
 
 ---
 
