@@ -22,7 +22,7 @@
 | **研究与分析** | 10 | `research-analysis-template.md` | 学术研究、技术调研、市场分析等 |
 | **移动开发** | 8 | `mobile-template.md` | iOS、Android、跨平台等 |
 | **其他领域** | 30 | `miscellaneous-template.md` | 网络、区块链、CMS等 |
-| **总计** | **122** | **10个模板** | - |
+| **总计** | **117** | **10个模板** | - |
 
 ---
 
@@ -51,7 +51,6 @@
 - rails-expert（Rails专家）
 - graphql-architect（GraphQL架构师）
 - database-optimizer（数据库优化）
-- database-optimization（数据库性能调优）
 - database-admin（数据库管理员）
 - sql-expert（SQL专家）
 - laravel-vue-developer（Laravel+Vue全栈）
@@ -64,7 +63,7 @@
 ---
 
 ### 3. 前端开发类（12个Agent）
-- frontend-developer（前端开发）
+- nextjs-developer（前端开发）
 - react-performance-optimization（React性能优化）
 - smart-flow:core:frontend-developer（SmartFlow前端开发）
 - typescript-expert（TypeScript专家）
@@ -80,14 +79,12 @@
 ### 4. 数据与AI类（10个Agent）
 - ai-engineer（AI工程师）
 - data-engineer（数据工程师）
-- ml-engineer（机器学习工程师）
 - mlops-engineer（MLOps工程师）
-- data-scientist（数据科学家）
+- sql-data-analyst（数据科学家）
 - data-analyst（数据分析师）
 - prompt-engineer（Prompt优化专家）
 - python-expert（Python专家，可用于数据科学）
 - quant-analyst（量化分析师）
-- academic-research-synthesizer（学术研究综合）
 
 **模板**: `data-ai-template.md`
 
@@ -109,15 +106,15 @@
 
 ---
 
-### 6. 测试与质量类（8个Agent）
+### 6. 测试与质量类（9个Agent）
 - test-automator（测试自动化）
 - code-reviewer（代码审查）
 - security-auditor（安全审计）
-- api-security-audit（API安全审计）
 - test-driven-development（TDD）
 - verification-before-completion（完成前验证）
 - debugger（调试专家）
 - error-detective（错误侦探）
+- knowledge-base-qa（知识库问答）
 
 **模板**: `testing-quality-template.md`
 
@@ -145,7 +142,6 @@
 - market-research-analyst（市场研究分析师）
 - search-specialist（搜索专家）
 - query-clarifier（查询澄清）
-- research-coordinator（研究协调器）
 - research-synthesizer（研究综合）
 - report-generator（报告生成器）
 
@@ -178,8 +174,7 @@
   - defi-strategist（DeFi策略）
 
 - **MCP相关**（4个）:
-  - mcp-expert（MCP专家）
-  - mcp-server-architect（MCP服务器架构）
+    - mcp-server-architect（MCP服务器架构）
   - mcp-security-auditor（MCP安全审计）
   - mcp-testing-engineer（MCP测试工程师）
 
@@ -296,5 +291,5 @@
 
 ---
 
-**最后更新**: 2025-01-07
+**最后更新**: 2025-01-08
 **维护者**: Smart Flow Team

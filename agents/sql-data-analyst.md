@@ -1,5 +1,5 @@
 ---
-name: data-scientist
+name: sql-data-analyst
 description: Data analysis expert for SQL queries, BigQuery operations, and data insights. Use proactively for data analysis tasks and queries.
 category: data-ai
 ---

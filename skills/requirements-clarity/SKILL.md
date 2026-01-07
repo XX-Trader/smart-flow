@@ -275,24 +275,78 @@ AI: 我来帮你设计登录功能。在开始之前，让我先评估当前需�
 
 ## 第一轮提问（核心目标）
 
-[使用 AskUserQuestion 工具]
+**使用 `AskUserQuestion` 工具进行提问**:
 
-Q1: 这个登录功能的目标是什么？
-   A. 网站用户登录
-   B. 管理后台登录
-   C. 两者都需要
+```xml
+<AskUserQuestion>
+  <questions>
+    <question>
+      <question>这个登录功能的目标是什么？</question>
+      <header>登录目标</header>
+      <options>
+        <option>
+          <label>网站用户登录</label>
+          <description>普通网站访客的登录功能</description>
+        </option>
+        <option>
+          <label>管理后台登录</label>
+          <description>内部管理员的登录功能</description>
+        </option>
+        <option>
+          <label>两者都需要</label>
+          <description>前台用户和后台管理都需要</description>
+        </option>
+      </options>
+      <multiSelect>false</multiSelect>
+    </question>
+    <question>
+      <question>目标用户是谁？</question>
+      <header>目标用户</header>
+      <options>
+        <option>
+          <label>普通网站访客</label>
+          <description>一般用户注册登录</description>
+        </option>
+        <option>
+          <label>内部管理员</label>
+          <description>后台管理人员</description>
+        </option>
+        <option>
+          <label>两者都有</label>
+          <description>包括普通用户和管理员</description>
+        </option>
+      </options>
+      <multiSelect>false</multiSelect>
+    </question>
+    <question>
+      <question>主要痛点是什么？</question>
+      <header>痛点分析</header>
+      <options>
+        <option>
+          <label>现有登录太慢</label>
+          <description>性能问题需要优化</description>
+        </option>
+        <option>
+          <label>没有登录功能</label>
+          <description>全新开发</description>
+        </option>
+        <option>
+          <label>需要支持多种登录方式</label>
+          <description>扩展功能需求</description>
+        </option>
+      </options>
+      <multiSelect>false</multiSelect>
+    </question>
+  </questions>
+</AskUserQuestion>
+```
 
-Q2: 目标用户是谁？
-   A. 普通网站访客
-   B. 内部管理员
-   C. 两者都有
+**用户回答**: A, A, B
 
-Q3: 主要痛点是什么？
-   A. 现有登录太慢
-   B. 没有登录功能
-   C. 需要支持多种登录方式
-
-你: A, A, B
+**AI理解**:
+- 登录目标：网站用户登录
+- 目标用户：普通网站访客
+- 痛点：需要支持多种登录方式
 
 AI: 明白了。让我更新评分。
 
