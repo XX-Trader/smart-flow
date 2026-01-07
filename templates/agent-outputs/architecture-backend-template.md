@@ -1,0 +1,951 @@
+# 架构与后端类 Agent 输出模板
+
+> **适用Agent**: backend-architect, database-architect, backend-developer, php-developer, ruby-expert, rails-expert, graphql-architect, database-optimizer, database-optimization, database-admin, sql-expert, laravel-vue-developer, directus-developer, drupal-developer, wordpress-developer（15个）
+> **版本**: v2.1.0
+> **更新**: 2025-01-07
+
+---
+
+## 模板说明
+
+本模板适用于所有**架构与后端类** Agent，包括：
+- 后端架构师
+- 数据库架构师
+- 后端开发工程师
+- 数据库优化专家
+- 各语言后端专家（PHP、Ruby、Laravel、Rails等）
+- CMS后端开发（WordPress、Drupal、Directus）
+- GraphQL架构师
+
+---
+
+## 通用输出模板
+
+### 1. 任务概述
+```markdown
+## 任务概述
+
+**任务目标**: [清晰描述要达成的技术目标]
+
+**任务范围**:
+- 包含: [明确包含的技术内容]
+- 不包含: [明确不包含的内容]
+
+**技术约束**:
+- 技术栈: [列出技术栈]
+- 性能要求: [性能指标]
+- 安全要求: [安全标准]
+
+**成功标准**:
+- [ ] [可衡量的技术标准1]
+- [ ] [可衡量的技术标准2]
+```
+
+### 2. 分析过程
+```markdown
+## 分析过程
+
+### 2.1 现状分析
+**当前架构**: [描述当前架构]
+
+**技术债务**:
+1. **[债务1]**: [描述] - [影响]
+
+**性能瓶颈**:
+- [瓶颈1]: [描述和影响]
+
+### 2.2 方案探索
+**技术选型**:
+1. **方案A**: [技术栈/架构]
+   - 优点: [列出优点]
+   - 缺点: [列出缺点]
+   - 适用场景: [说明]
+
+2. **方案B**: [技术栈/架构]
+   - 优点: [列出优点]
+   - 缺点: [列出缺点]
+   - 适用场景: [说明]
+
+### 2.3 方案选择
+**推荐方案**: [方案A/B/混合方案]
+
+**选择理由**:
+1. [技术理由1]
+2. [业务理由2]
+
+**风险评估**:
+- [风险1]: [风险描述] - [缓解措施]
+
+**迁移策略**:
+- [步骤1]: [描述]
+- [步骤2]: [描述]
+```
+
+### 3. 详细方案
+```markdown
+## 详细方案
+
+### 3.1 系统架构设计
+#### 3.1.1 架构概览
+```
+[架构图 - 文字描述或ASCII图]
+客户端 → [负载均衡] → [API网关] → [服务层] → [数据层]
+```
+
+#### 3.1.2 架构分层
+- **接入层**: [职责和技术选型]
+- **网关层**: [职责和技术选型]
+- **服务层**: [职责和技术选型]
+- **数据层**: [职责和技术选型]
+
+#### 3.1.3 核心组件
+1. **[组件名1]**
+   - 职责: [描述职责]
+   - 技术栈: [列出技术]
+   - 接口: [主要接口]
+
+### 3.2 API设计
+#### 3.2.1 REST API设计
+**资源命名**:
+- GET /api/resources - [获取列表]
+- GET /api/resources/:id - [获取详情]
+- POST /api/resources - [创建资源]
+- PUT /api/resources/:id - [更新资源]
+- DELETE /api/resources/:id - [删除资源]
+
+**请求/响应格式**:
+```json
+// 请求示例
+{
+  "field1": "value1"
+}
+
+// 响应示例
+{
+  "code": 200,
+  "message": "success",
+  "data": {
+    "id": "123"
+  }
+}
+```
+
+**错误码设计**:
+- 200: 成功
+- 400: 请求参数错误
+- 401: 未认证
+- 500: 服务器错误
+
+#### 3.2.2 GraphQL Schema设计（如适用）
+```graphql
+type Query {
+  getUser(id: ID!): User
+}
+
+type Mutation {
+  createUser(input: CreateUserInput!): User!
+}
+
+type User {
+  id: ID!
+  name: String!
+}
+```
+
+### 3.3 数据库设计
+#### 3.3.1 数据模型
+**ER关系**:
+```
+[用户表] ──< [订单表] ──< [订单明细表]
+```
+
+#### 3.3.2 表结构设计
+**表名**: users
+| 字段名 | 类型 | 约束 | 索引 | 说明 |
+|--------|------|------|------|------|
+| id | BIGINT | PK, AI | PRIMARY | 主键 |
+| username | VARCHAR(50) | NOT NULL | INDEX | 用户名 |
+| created_at | TIMESTAMP | NOT NULL | - | 创建时间 |
+
+#### 3.3.3 索引策略
+- **主键索引**: [所有主键]
+- **唯一索引**: [需要唯一的字段]
+- **普通索引**: [频繁查询的字段]
+- **复合索引**: [多字段组合查询]
+
+#### 3.3.4 分库分表策略（如需要）
+- **分片键**: [选择分片键]
+- **分片算法**: [分片算法]
+
+### 3.4 缓存设计
+#### 3.4.1 缓存策略
+- **缓存类型**: [Redis/Memcached/本地缓存]
+- **缓存模式**: [Cache-Aside/Read-Through]
+
+#### 3.4.2 缓存Key设计
+```
+user:{id}           - 用户信息
+user:list:{page}    - 用户列表
+```
+
+#### 3.4.3 缓存过期策略
+- **热数据**: [过期时间]
+- **温数据**: [过期时间]
+
+### 3.5 消息队列设计（如需要）
+#### 3.5.1 消息队列选型
+- **技术**: [RabbitMQ/Kafka/RocketMQ]
+- **原因**: [选择理由]
+
+#### 3.5.2 消息定义
+**Topic/Exchange**: [名称]
+**消息格式**:
+```json
+{
+  "eventType": "UserCreated",
+  "data": {
+    "userId": "123"
+  }
+}
+```
+
+### 3.6 安全设计
+#### 3.6.1 认证授权
+- **认证方式**: [JWT/Session/OAuth2]
+- **权限模型**: [RBAC/ABAC]
+
+#### 3.6.2 数据加密
+- **传输加密**: [HTTPS/TLS]
+- **存储加密**: [字段加密方案]
+
+#### 3.6.3 防护措施
+- SQL注入防护: [参数化查询]
+- XSS防护: [输入过滤]
+- 限流熔断: [限流策略]
+
+### 3.7 代码实现
+#### 3.7.1 项目结构
+```
+project/
+├── src/
+│   ├── controllers/     # 控制器层
+│   ├── services/        # 业务逻辑层
+│   ├── repositories/    # 数据访问层
+│   ├── models/          # 数据模型
+│   └── utils/           # 工具函数
+├── tests/               # 测试文件
+└── docs/                # 文档
+```
+
+#### 3.7.2 核心代码示例
+```python
+# 示例：用户服务
+class UserService:
+    def get_user(self, user_id: int) -> User:
+        # 先查缓存
+        cached = await self.cache.get(f"user:{user_id}")
+        if cached:
+            return User.parse_raw(cached)
+
+        # 查数据库
+        user = await self.user_repo.find_by_id(user_id)
+        return user
+```
+
+### 3.8 性能优化
+#### 3.8.1 查询优化
+- **慢查询优化**: [优化方案]
+- **N+1问题**: [解决方案]
+- **批量操作**: [批量策略]
+
+#### 3.8.2 并发优化
+- **连接池**: [连接池配置]
+- **异步处理**: [异步策略]
+- **锁机制**: [锁策略]
+
+### 3.9 监控与日志
+#### 3.9.1 监控指标
+- **应用指标**: [QPS、响应时间、错误率]
+- **系统指标**: [CPU、内存、磁盘、网络]
+- **业务指标**: [订单量、用户活跃度]
+
+#### 3.9.2 日志规范
+```json
+{
+  "level": "info",
+  "timestamp": "2025-01-07T10:00:00Z",
+  "service": "user-service",
+  "message": "User created"
+}
+```
+```
+
+### 4. 验证与测试
+```markdown
+## 验证与测试
+
+### 4.1 单元测试
+**测试覆盖**: [目标覆盖率]
+
+**测试示例**:
+```python
+def test_get_user_cache_hit():
+    # Given
+    user = User(id=1, name="John")
+    cache.set("user:1", user.json())
+
+    # When
+    result = userService.get_user(1)
+
+    # Then
+    assert result.id == 1
+```
+
+### 4.2 集成测试
+**测试场景**:
+1. API端到端测试
+2. 数据库集成测试
+3. 缓存集成测试
+
+### 4.3 性能测试
+**压测工具**: [JMeter/Locust/k6]
+
+**压测场景**:
+- QPS: [目标QPS]
+- 并发用户: [目标并发]
+- 响应时间: [P95 < Xms]
+
+### 4.4 安全测试
+- [ ] SQL注入测试
+- [ ] XSS测试
+- [ ] CSRF测试
+- [ ] 权限测试
+```
+
+### 5. 建议与后续
+```markdown
+## 建议与后续
+
+### 5.1 优化建议
+**短期优化**（1-2周）:
+- [ ] [优化项1]
+
+**中期优化**（1-2月）:
+- [ ] [优化项1]
+
+**长期规划**（3月+）:
+- [ ] [优化项1]
+
+### 5.2 技术债务
+**已知债务**:
+1. **[债务1]**: [描述] - [优先级]
+
+### 5.3 后续步骤
+1. **[步骤1]**: [描述] - [负责人]
+
+### 5.4 风险与缓解
+| 风险 | 影响 | 概率 | 缓解措施 |
+|------|------|------|---------|
+| [风险1] | [高/中/低] | [高/中/低] | [措施] |
+```
+
+---
+
+## 特殊 Agent 定制
+
+### backend-architect 模板增强
+```markdown
+# 后端架构设计方案
+
+## 1. 架构目标
+### 1.1 业务目标
+- **支持用户量**: [X万用户]
+- **并发量**: [X QPS]
+- **数据量**: [X TB数据]
+
+### 1.2 技术目标
+- **高可用性**: [99.9%]
+- **可扩展性**: [水平扩展能力]
+- **性能**: [响应时间 < Xms]
+
+### 1.3 约束条件
+- **预算**: [硬件/云服务预算]
+- **团队**: [团队规模和技能]
+- **时间**: [开发周期]
+
+## 2. 架构设计
+### 2.1 架构选型
+**架构模式**: [单体/微服务/Serverless/事件驱动]
+
+**选择理由**:
+1. [理由1]
+2. [理由2]
+
+### 2.2 架构图
+```
+                    [负载均衡: Nginx]
+                           |
+                    [API网关: Kong]
+                           |
+          +----------------+----------------+
+          |                |                |
+    [用户服务]        [订单服务]        [支付服务]
+          |                |                |
+          +----------------+----------------+
+                           |
+                    [数据访问层]
+                           |
+          +----------------+----------------+
+          |                |                |
+   [MySQL主从]       [Redis集群]     [MongoDB分片]
+```
+
+### 2.3 服务拆分
+#### 2.3.1 服务边界
+1. **用户服务**
+   - 职责: 用户注册、登录、信息管理
+   - 接口: [列出主要API]
+   - 数据库: [独立数据库]
+
+2. **订单服务**
+   - 职责: 订单创建、查询、状态管理
+   - 接口: [列出主要API]
+   - 数据库: [独立数据库]
+
+#### 2.3.2 服务通信
+- **同步通信**: [REST/gRPC]
+- **异步通信**: [消息队列]
+- **服务发现**: [Consul/Eureka/Nacos]
+
+### 2.4 数据架构
+#### 2.4.1 数据存储选型
+| 数据类型 | 存储方案 | 理由 |
+|---------|---------|------|
+| 用户数据 | MySQL | ACID保证 |
+| 缓存数据 | Redis | 高性能 |
+| 日志数据 | Elasticsearch | 全文搜索 |
+
+#### 2.4.2 数据一致性
+- **强一致性场景**: [支付等核心业务]
+- **最终一致性场景**: [订单状态同步等]
+- **一致性方案**: [分布式事务/事件驱动]
+
+### 2.5 技术选型
+#### 2.5.1 后端框架
+- **开发语言**: [Go/Java/Python/Node.js]
+- **框架**: [框架名称]
+- **理由**: [选择理由]
+
+#### 2.5.2 中间件
+- **API网关**: [Kong/Traefik]
+- **配置中心**: [Apollo/Nacos]
+- **监控**: [Prometheus+Grafana]
+- **链路追踪**: [Jaeger/Zipkin]
+
+### 2.6 非功能设计
+#### 2.6.1 高可用设计
+- **服务冗余**: [多实例部署]
+- **故障转移**: [自动切换机制]
+- **降级熔断**: [降级策略]
+
+#### 2.6.2 高性能设计
+- **缓存策略**: [多级缓存]
+- **异步处理**: [异步非阻塞]
+- **数据库优化**: [读写分离/分库分表]
+
+#### 2.6.3 安全设计
+- **网络安全**: [VPC/安全组]
+- **应用安全**: [认证授权]
+- **数据安全**: [加密脱敏]
+
+### 2.7 部署架构
+#### 2.7.1 容器化
+- **容器**: [Docker]
+- **编排**: [Kubernetes]
+- **CI/CD**: [Jenkins/GitLab CI]
+
+#### 2.7.2 资源规划
+| 服务 | 实例数 | CPU | 内存 | 存储 |
+|------|--------|-----|------|------|
+| 用户服务 | 3 | 2核 | 4GB | 20GB |
+
+### 2.8 监控与运维
+#### 2.8.1 监控体系
+- **基础监控**: [CPU/内存/磁盘/网络]
+- **应用监控**: [QPS/响应时间/错误率]
+- **业务监控**: [订单量/交易额]
+
+#### 2.8.2 告警策略
+| 告警项 | 阈值 | 级别 | 通知方式 |
+|--------|------|------|---------|
+| CPU使用率 | >80% | 警告 | 邮件 |
+
+## 3. 实施计划
+### 3.1 迁移路径
+**阶段1**: [基础架构搭建] - [2周]
+**阶段2**: [核心服务开发] - [4周]
+**阶段3**: [性能优化] - [2周]
+**阶段4**: [上线试运行] - [1周]
+
+### 3.2 风险管理
+| 风险 | 影响 | 概率 | 应对措施 |
+|------|------|------|---------|
+| [风险1] | [高] | [中] | [措施] |
+
+---
+**质量评分**: [X]/100
+**生成时间**: [timestamp]
+**Agent**: backend-architect
+```
+
+### database-architect 模板增强
+```markdown
+# 数据库架构设计方案
+
+## 1. 数据需求分析
+### 1.1 业务数据量
+| 数据类型 | 当前量 | 年增长 | 3年预估 |
+|---------|--------|--------|---------|
+| 用户数据 | 10万 | 50% | 34万 |
+| 订单数据 | 100万 | 100% | 800万 |
+
+### 1.2 数据特征
+- **读写比例**: [读:写 = X:1]
+- **数据热度**: [热数据:温数据:冷数据 = X:Y:Z]
+- **查询特点**: [高频查询/复杂查询]
+
+### 1.3 性能要求
+- **QPS**: [X万QPS]
+- **响应时间**: [P99 < Xms]
+- **并发连接**: [X个连接]
+
+## 2. 数据库选型
+### 2.1 存储方案对比
+| 方案 | 优点 | 缺点 | 适用场景 | 评分 |
+|------|------|------|---------|------|
+| MySQL | 成熟稳定/ACID | 大表性能差 | 事务性业务 | 90 |
+| MongoDB | 灵活Schema | 事务支持弱 | 文档存储 | 80 |
+| Redis | 高性能 | 数据有限 | 缓存/队列 | 85 |
+
+### 2.2 推荐方案
+**主数据库**: [MySQL 8.0]
+**理由**:
+1. ACID保证，适合事务
+2. 成熟稳定，社区活跃
+
+**辅助数据库**: [Redis]
+**理由**:
+1. 高性能缓存
+2. 支持多种数据结构
+
+## 3. 数据模型设计
+### 3.1 概念模型
+```
+[ER图 - 文字描述]
+用户 ──< 订单 ──< 订单明细
+ │
+ └──< 用户标签
+```
+
+### 3.2 逻辑模型
+#### 3.2.1 表关系
+- **1对1**: 用户 ← 用户扩展
+- **1对多**: 用户 ← 订单
+- **多对多**: 商品 ↔ 订单 (通过订单明细)
+
+#### 3.2.2 表规范
+- **命名规范**: [小写_下划线]
+- **主键**: [BIGINT自增]
+- **时间戳**: [created_at, updated_at]
+- **软删除**: [deleted_at]
+
+### 3.3 物理模型
+#### 3.3.1 表结构设计
+**表名**: tb_user
+| 字段 | 类型 | 长度 | 允许空 | 默认值 | 索引 | 说明 |
+|------|------|------|--------|--------|------|------|
+| id | BIGINT | - | NO | AUTO | PK | 主键 |
+| username | VARCHAR | 50 | NO | - | UK | 用户名 |
+| status | TINYINT | - | NO | 1 | IDX | 状态 |
+| created_at | DATETIME | - | NO | NOW | - | 创建时间 |
+
+#### 3.3.2 索引设计
+**主键索引**: 所有表的id字段
+
+**唯一索引**:
+- tb_user.username
+- tb_user.email
+
+**普通索引**:
+- tb_user.status
+- tb_order.created_at
+
+**复合索引**:
+- idx_order_user_status: (user_id, status)
+
+### 3.4 分库分表设计
+#### 3.4.1 分片策略
+**分片键**: user_id
+**分片算法**: Hash取模
+**分片数量**: 4库16表
+
+**路由规则**:
+```
+库号 = user_id % 4
+表号 = user_id % 16
+```
+
+### 3.5 读写分离设计
+#### 3.5.1 架构
+```
+              [应用]
+                |
+          [中间件: ProxySQL]
+                |
+        +-------+-------+
+        |               |
+     [主库: Master]  [从库: Slave]
+```
+
+#### 3.5.2 路由规则
+- 写操作 → 主库
+- 读操作 → 从库（负载均衡）
+- 强一致性读 → 主库
+
+### 3.6 备份与恢复
+#### 3.6.1 备份策略
+**全量备份**: 每周日凌晨2点
+**增量备份**: 每天凌晨3点
+**binlog备份**: 实时
+
+**备份保留**:
+- 全量备份: 保留1个月
+- 增量备份: 保留1周
+
+#### 3.6.2 恢复方案
+**RTO**: < 1小时
+**RPO**: < 5分钟
+
+**恢复流程**:
+1. 恢复全量备份
+2. 应用增量备份
+3. 应用binlog
+4. 验证数据
+
+## 4. 性能优化
+### 4.1 查询优化
+#### 4.1.1 慢查询优化
+**慢查询阈值**: 1秒
+
+**优化方法**:
+- 使用EXPLAIN分析执行计划
+- 优化索引
+- 优化SQL语句
+
+#### 4.1.2 常见问题
+**N+1查询**:
+- 问题: 循环查询
+- 方案: 使用JOIN或批量查询
+
+**深分页**:
+- 问题: LIMIT offset, N
+- 方案: 使用游标/延迟关联
+
+### 4.2 缓存设计
+#### 4.2.1 缓存策略
+- **缓存模式**: Cache-Aside
+- **缓存穿透**: 布隆过滤器
+- **缓存击穿**: 互斥锁
+
+#### 4.2.2 缓存Key设计
+```
+user:{id}              # 用户信息
+user:list:page:{page}  # 用户列表
+```
+
+#### 4.2.3 缓存更新
+- 写操作: 先更新DB，再删除缓存
+- 读操作: 先读缓存，miss则读DB并写缓存
+
+### 4.3 连接池优化
+- **连接池**: HikariCP
+- **最大连接**: 50
+- **最小空闲**: 10
+
+## 5. 监控与运维
+### 5.1 监控指标
+#### 5.1.1 数据库指标
+- **QPS**: [查询/秒]
+- **TPS**: [事务/秒]
+- **连接数**: [活跃连接/总连接]
+- **慢查询**: [慢查询数量]
+
+#### 5.1.2 系统指标
+- **CPU使用率**: < 70%
+- **内存使用率**: < 80%
+- **磁盘IO**: < 70%
+
+### 5.2 告警规则
+| 指标 | 阈值 | 级别 | 处理 |
+|------|------|------|------|
+| 慢查询 | >100/分钟 | 警告 | 优化SQL |
+| CPU使用率 | >80% | 警告 | 扩容/优化 |
+
+---
+**质量评分**: [X]/100
+**生成时间**: [timestamp]
+**Agent**: database-architect
+```
+
+### backend-developer 模板增强
+```markdown
+# 后端开发实施方案
+
+## 1. 开发任务
+### 1.1 任务描述
+**功能名称**: [功能名称]
+
+**需求描述**:
+[详细描述要实现的功能]
+
+**验收标准**:
+- [ ] [标准1]
+- [ ] [标准2]
+
+### 1.2 技术栈
+- **语言**: [Java/Go/Python/Node.js]
+- **框架**: [Spring Boot/Gin/Django/Express]
+- **数据库**: [MySQL/PostgreSQL/MongoDB]
+- **缓存**: [Redis/Memcached]
+
+## 2. 详细设计
+### 2.1 API设计
+#### 2.1.1 接口列表
+**1. 创建订单**
+- **路径**: POST /api/orders
+- **认证**: 需要
+- **请求体**:
+```json
+{
+  "userId": 123,
+  "items": [
+    {"productId": 1, "quantity": 2}
+  ]
+}
+```
+- **响应**: 201 Created
+
+**2. 查询订单**
+- **路径**: GET /api/orders/:orderId
+- **认证**: 需要
+- **响应**: 200 OK
+
+#### 2.1.2 数据验证
+**请求参数验证**:
+- userId: 必填, 整数, >0
+- items: 必填, 数组, length>0
+
+### 2.2 数据库设计
+#### 2.2.1 表结构
+```sql
+CREATE TABLE orders (
+  id BIGINT PRIMARY KEY AUTO_INCREMENT,
+  order_no VARCHAR(32) NOT NULL UNIQUE,
+  user_id BIGINT NOT NULL,
+  total_amount DECIMAL(10,2) NOT NULL,
+  status TINYINT NOT NULL DEFAULT 0,
+  created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  INDEX idx_user_id (user_id),
+  INDEX idx_status (status)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+```
+
+#### 2.2.2 数据访问层
+```python
+class OrderRepository:
+    def find_by_id(self, order_id: int) -> Order:
+        pass
+
+    def find_by_user_id(self, user_id: int) -> List[Order]:
+        pass
+
+    def create(self, order: Order) -> Order:
+        pass
+```
+
+### 2.3 业务逻辑
+#### 2.3.1 核心流程
+```python
+class OrderService:
+    def create_order(self, user_id: int, items: List[OrderItem]) -> Order:
+        # 1. 参数验证
+        self._validate_items(items)
+
+        # 2. 查询商品信息
+        products = self.product_service.get_products([...])
+
+        # 3. 计算金额
+        total_amount = self._calculate_amount(items, products)
+
+        # 4. 创建订单
+        order = Order(order_no=self._generate_order_no(), ...)
+        order = self.order_repo.create(order)
+
+        # 5. 扣减库存
+        self.inventory_service.deduct_stock(items)
+
+        return order
+```
+
+#### 2.3.2 异常处理
+```python
+class OrderNotFoundError(Exception):
+    pass
+
+@app.errorhandler(OrderNotFoundError)
+def handle_order_not_found(e):
+    return jsonify({"code": 404, "message": "Order not found"}), 404
+```
+
+### 2.4 代码结构
+```
+src/
+├── controllers/         # 控制器层
+├── services/            # 业务逻辑层
+├── repositories/        # 数据访问层
+├── models/              # 数据模型
+├── schemas/             # 请求/响应模式
+├── middlewares/         # 中间件
+└── utils/               # 工具函数
+```
+
+## 3. 代码实现
+### 3.1 控制器层
+```python
+@order_bp.route('/orders', methods=['POST'])
+@login_required
+def create_order():
+    """创建订单"""
+    data = request.get_json()
+    user_id = g.user.id
+
+    order = order_service.create_order(
+        user_id=user_id,
+        items=data['items']
+    )
+    return jsonify({
+        "code": 201,
+        "message": "Order created",
+        "data": order.to_dict()
+    }), 201
+```
+
+### 3.2 服务层
+```python
+class OrderService:
+    def create_order(self, user_id: int, items: List[dict]) -> Order:
+        # 验证商品
+        product_ids = [item['productId'] for item in items]
+        products = self.product_service.get_products_by_ids(product_ids)
+
+        # 创建订单
+        order = Order(user_id=user_id, status=0)
+        order = self.order_repo.create(order)
+
+        return order
+```
+
+### 3.3 数据访问层
+```python
+class OrderRepository:
+    def find_by_id(self, order_id: int) -> Optional[Order]:
+        return db.session.query(Order).filter(Order.id == order_id).first()
+
+    def create(self, order: Order) -> Order:
+        db.session.add(order)
+        db.session.commit()
+        return order
+```
+
+### 3.4 单元测试
+```python
+def test_create_order_success():
+    """测试成功创建订单"""
+    # Given
+    user_id = 123
+    items = [{'productId': 1, 'quantity': 2}]
+
+    # When
+    order = order_service.create_order(user_id, items)
+
+    # Then
+    assert order.user_id == user_id
+```
+
+## 4. 部署与运维
+### 4.1 环境配置
+```bash
+# .env.production
+DATABASE_URL=mysql://localhost:3306/db_prod
+REDIS_URL=redis://localhost:6379
+LOG_LEVEL=INFO
+```
+
+### 4.2 部署步骤
+1. 安装依赖
+2. 运行数据库迁移
+3. 配置环境变量
+4. 启动服务
+5. 健康检查
+
+### 4.3 监控指标
+- 接口响应时间
+- 错误率
+- QPS
+- 数据库连接数
+
+---
+**质量评分**: [X]/100
+**生成时间**: [timestamp]
+**Agent**: backend-developer
+```
+
+---
+
+## 使用说明
+
+### 在技能中引用模板
+
+```markdown
+## Agent 调用指令
+
+调用 `backend-architect` agent 时，请遵循以下要求：
+
+1. **输出格式**: 使用 `templates/agent-outputs/architecture-backend-template.md`
+2. **章节要求**: 包含所有必需章节
+3. **质量标准**: 输出质量评分 ≥90分
+4. **技术深度**: 架构设计必须包含技术选型理由
+```
+
+### 模板验证（宽松模式）
+
+由于采用宽松验证：
+- Agent 输出后**不强制检查格式**
+- 建议在 Agent 提示中**明确引用模板**
+- 输出结果由用户**手动检查**
+
+---
+
+## 版本历史
+
+### v2.1.0 (2025-01-07)
+- ✅ 创建通用模板
+- ✅ 添加 backend-architect 定制模板
+- ✅ 添加 database-architect 定制模板
+- ✅ 添加 backend-developer 定制模板
+- ✅ 支持15个架构与后端类 Agent
+
+---
+
+**最后更新**: 2025-01-07
+**维护者**: Smart Flow Team

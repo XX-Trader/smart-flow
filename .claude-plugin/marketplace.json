@@ -1,0 +1,21 @@
+{
+  "name": "smart-flow-marketplace",
+  "description": "Smart Flow 智能任务调度插件市场 - 全量整合版",
+  "owner": {
+    "name": "XX-Trader",
+    "email": "your-email@example.com"
+  },
+  "homepage": "https://github.com/XX-Trader/smart-flow",
+  "plugins": [
+    {
+      "name": "smart-flow",
+      "description": "智能任务调度插件 v2.0 全量整合版 - 通过需求澄清、任务分解、并行执行、结果整合四大阶段，大幅提升开发效率。支持 122+ 专业 Agent，132+ 技能，11+ 斜杠命令。按需加载，资源丰富。",
+      "version": "2.0.0",
+      "source": "./",
+      "author": {
+        "name": "XX-Trader",
+        "email": "your-email@example.com"
+      }
+    }
+  ]
+}
