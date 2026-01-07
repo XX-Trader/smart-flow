@@ -1,8 +1,24 @@
 # Smart Flow v2.0 测试指南
 
-> **版本**: v2.0.0
+> **版本**: v2.0.1
 > **测试时间**: 2025-01-07
 > **测试目标**: 验证所有功能正常工作
+> **最新修复**: 需求澄清技能现已强制使用 AskUserQuestion 工具
+
+---
+
+## 🔄 最新更新 (v2.0.1)
+
+### ✅ 已修复问题
+**问题**: 需求澄清技能没有自动调用 `AskUserQuestion` 工具
+- **影响**: 用户需要手动输入答案，而不是选择选项
+- **修复**: 三个核心技能文件已更新，强制使用 `AskUserQuestion` 工具
+  - `skills/requirements-clarity/SKILL.md`
+  - `skills/smart-workflow/SKILL.md`
+  - `skills-user/requirements-clarity/skills/SKILL.md`
+- **效果**: 现在所有需求澄清都会自动弹出选项界面
+
+**测试建议**: 优先测试"测试 1.2 - 需求澄清工具调用"，验证修复效果
 
 ---
 
@@ -10,7 +26,7 @@
 
 ### 1. 确认插件已加载
 
-首先，确认 Smart Flow v2.0 已经正确加载：
+首先，确认 Smart Flow v2.0.1 已经正确加载：
 
 **方法 1: 使用斜杠命令**
 ```
@@ -27,7 +43,7 @@
 
 应该看到：
 ```
-smart-flow@smart-flow-marketplace v2.0.0
+smart-flow@smart-flow-marketplace v2.0.1
 ```
 
 ### 2. 重启 Claude Code（如果需要）
@@ -36,6 +52,18 @@ smart-flow@smart-flow-marketplace v2.0.0
 1. 完全退出 Claude Code
 2. 重新打开 Claude Code
 3. 等待插件加载完成
+
+### 3. 强制更新插件（如果测试失败）
+
+```bash
+# 1. 卸载旧版本
+/plugin uninstall smart-flow@smart-flow-marketplace
+
+# 2. 重新安装
+/plugin install smart-flow@smart-flow-marketplace
+
+# 3. 重启 Claude Code
+```
 
 ---
 
@@ -59,19 +87,94 @@ smart-flow@smart-flow-marketplace v2.0.0
 
 ---
 
-#### 测试 1.2: 查看核心技能
+#### 测试 1.2: 需求澄清工具调用 ⭐ **(最重要！)**
 
 **测试命令**:
 ```
-我需要开发一个用户登录功能，帮我分析一下需求
+我想开发一个博客系统
 ```
 
 **预期行为**:
-- Claude 应该自动识别为开发需求
-- 可能会启动 `requirements-clarity` 或 `feature-development` 技能
-- 系统性地提问需求细节
+- Claude 自动识别为需求不明确的任务
+- **自动弹出 `AskUserQuestion` 界面**（这是核心！）
+- 显示 2-4 个选择题，例如：
+  - Q1: 这是个人博客还是多人博客平台？
+    - A. 个人博客（单人写作）
+    - B. 多人博客（团队协作）
+    - C. 博客平台（开放注册）
+  - Q2: 需要哪些核心功能？（多选）
+    - [ ] 文章发布与编辑
+    - [ ] 评论系统
+    - [ ] 用户注册/登录
+    - [ ] 文章分类/标签
+  - Q3: 使用什么技术栈？
+    - A. Django + Vue3
+    - B. FastAPI + Vue3
+    - C. 其他
+  - Q4: 数据存储方案？
+    - A. 本地 JSON 文件（推荐 MVP）
+    - B. MySQL/PostgreSQL
+    - C. SQLite
 
-**✅ 通过标准**: 看到系统性提问或需求分析
+**✅ 通过标准**:
+- **必须看到选项界面**，而不是手动提问
+- 可以通过点击选项回答
+- 回答后系统生成需求摘要
+
+**❌ 失败标志**:
+- 只是文字提问，没有弹出选项界面
+- 需要手动输入答案
+- 说明插件缓存未更新，需要强制更新（见上方"强制更新插件"）
+
+**重要提示**: 这是最关键的测试！如果这个测试失败，说明修复没有生效。
+
+---
+
+#### 测试 1.3: 完整 Smart Flow 工作流
+
+**测试命令**:
+```
+/smart-flow
+
+我想开发一个用户登录功能
+```
+
+**预期流程**:
+```
+[阶段 1: 需求澄清]
+⚠️ 应该弹出 AskUserQuestion 界面！
+
+Q: 登录功能的使用场景？
+   A. 网站用户登录
+   B. 管理后台登录
+   C. 两者都需要
+
+Q: 登录方式？
+   [ ] 邮箱+密码
+   [ ] 手机号+密码
+   [ ] 第三方登录（微信/GitHub）
+
+... 根据你的选择继续提问
+
+[阶段 2: 任务分解]
+已识别以下任务：
+✅ product-manager（PRD 文档）
+✅ ui-ux-designer（界面设计）
+✅ backend-architect（API 设计）
+✅ security-auditor（安全审查）
+
+[阶段 3: 并行执行]
+⏳ 正在同时执行 4 个 agent...
+
+[阶段 4: 结果整合]
+✅ 完整报告已生成
+```
+
+**✅ 通过标准**:
+- **阶段 1 必须弹出 AskUserQuestion 界面**
+- 完整执行 4 个阶段
+- 成功调用多个 Agent
+- 生成完整报告
 
 ---
 
@@ -134,12 +237,12 @@ print(result)
 - 用户列表展示（分页）
 - 用户新增/编辑/删除
 - 用户状态管理（启用/禁用）
-- 使用 Django + Vue + Element Plus
+- 使用 Django + Vue + Ant Design Vue
 ```
 
 **预期行为**:
 1. 识别为中等复杂度功能
-2. 进入需求澄清阶段（可能简短）
+2. **可能弹出 AskUserQuestion 补充细节**
 3. 生成技术方案
 4. 生成数据库设计
 5. 生成 API 设计
@@ -149,6 +252,7 @@ print(result)
 **✅ 通过标准**:
 - 生成了结构化文档
 - 包含需求、技术方案、数据库、API、UI 设计
+- **如果需要澄清，应该使用 AskUserQuestion 工具**
 
 ---
 
@@ -212,56 +316,6 @@ echo "# Test" > test.md
 
 ---
 
-### 阶段 5: 完整工作流测试
-
-#### 测试 5.1: Smart Flow 完整流程
-
-**测试命令**:
-```
-/smart-flow
-
-我想开发一个博客系统
-- 用户可以发布文章（Markdown）
-- 支持评论和点赞
-- 文章分类和标签
-- 使用 Django + Vue
-```
-
-**预期流程**:
-```
-[阶段 1: 需求澄清]
-Q: 目标用户是谁？
-A: [你的回答]
-Q: 需要哪些核心功能？
-A: [你的回答]
-...
-
-[阶段 2: 任务分解]
-已识别以下任务：
-✅ 产品经理 (PRD)
-✅ UI/UX 设计师 (界面设计)
-✅ 数据库架构师 (数据库设计)
-✅ 后端架构师 (API 设计)
-✅ 前端开发 (页面实现)
-✅ 测试工程师 (测试用例)
-
-[阶段 3: 并行执行]
-⏳ 正在同时执行 6 个 agent...
-✅ 产品经理 (100%)
-✅ UI/UX 设计师 (100%)
-...
-
-[阶段 4: 结果整合]
-✅ 完整报告已生成
-```
-
-**✅ 通过标准**:
-- 完整执行 4 个阶段
-- 成功调用多个 Agent
-- 生成完整报告
-
----
-
 ## 🔍 故障排查
 
 ### 问题 1: 插件未加载
@@ -300,7 +354,29 @@ cat UNIFIED_INDEX.md | grep "python-expert"
 
 ---
 
-### 问题 3: 技能无法触发
+### 问题 3: 需求澄清没有弹出选项界面 ⭐
+
+**症状**: 只是文字提问，没有弹出 `AskUserQuestion` 界面
+
+**原因**: 插件缓存未更新到 v2.0.1
+
+**解决方案**:
+```bash
+# 1. 卸载旧版本
+/plugin uninstall smart-flow@smart-flow-marketplace
+
+# 2. 清理缓存（可选）
+rm -rf "C:\Users\superma\.claude\plugins\cache\smart-flow-marketplace"
+
+# 3. 重新安装
+/plugin install smart-flow@smart-flow-marketplace
+
+# 4. 重启 Claude Code
+```
+
+---
+
+### 问题 4: 技能无法触发
 
 **症状**: 技能没有自动匹配
 
@@ -315,24 +391,6 @@ cat UNIFIED_INDEX.md
 
 ---
 
-### 问题 4: 缓存未更新
-
-**症状**: 还是旧的 v1.0.0 功能
-
-**解决方案**:
-```bash
-# 1. 清理缓存
-rm -rf "C:\Users\superma\.claude\plugins\cache\smart-flow-marketplace"
-
-# 2. 重新安装
-/plugin uninstall smart-flow@smart-flow-marketplace
-/plugin install smart-flow@smart-flow-marketplace
-
-# 3. 重启 Claude Code
-```
-
----
-
 ## 📊 测试结果记录
 
 ### 测试清单
@@ -340,14 +398,14 @@ rm -rf "C:\Users\superma\.claude\plugins\cache\smart-flow-marketplace"
 | 测试项 | 状态 | 备注 |
 |--------|------|------|
 | 帮助信息显示 | ⬜ | 待测试 |
-| 需求澄清功能 | ⬜ | 待测试 |
+| **需求澄清工具调用** ⭐ | ⬜ | **最重要！验证 v2.0.1 修复** |
+| Smart Flow 完整流程 | ⬜ | 待测试 |
 | python-expert 调用 | ⬜ | 待测试 |
 | code-reviewer 调用 | ⬜ | 待测试 |
 | feature-development 技能 | ⬜ | 待测试 |
 | auto-fix 技能 | ⬜ | 待测试 |
 | /commit 命令 | ⬜ | 待测试 |
 | /深度思考 命令 | ⬜ | 待测试 |
-| 完整工作流 | ⬜ | 待测试 |
 
 **图例**: ✅ 通过 | ⬜ 待测试 | ❌ 失败 | ⚠️ 警告
 
@@ -355,35 +413,38 @@ rm -rf "C:\Users\superma\.claude\plugins\cache\smart-flow-marketplace"
 
 ## 💡 快速测试脚本
 
-如果你想快速测试所有功能，可以按顺序执行：
+如果你想快速测试核心功能，可以按顺序执行：
 
 ```bash
 # 1. 测试帮助
 /smart-flow help
 
-# 2. 测试 Agent 调用
+# 2. 测试需求澄清工具调用 ⭐（最重要！）
+我想开发一个博客系统
+# 应该弹出选项界面！
+
+# 3. 测试完整工作流
+/smart-flow
+我想开发一个用户登录功能
+# 应该在阶段 1 弹出选项界面
+
+# 4. 测试 Agent 调用
 使用 python-expert 帮我优化代码
 
-# 3. 测试技能
-使用 feature-development 开发一个TODO功能
-
-# 4. 测试斜杠命令
+# 5. 测试斜杠命令
 /commit
 
-# 5. 测试深度思考
+# 6. 测试深度思考
 /深度思考 什么是好的代码架构？
-
-# 6. 测试完整工作流
-/smart-flow
-我想做一个个人博客
 ```
 
 ---
 
 ## 🎯 成功标准
 
-Smart Flow v2.0 测试通过的标准：
+Smart Flow v2.0.1 测试通过的标准：
 
+- ✅ **需求澄清自动弹出 AskUserQuestion 界面**（核心！）
 - ✅ 所有斜杠命令可正常使用
 - ✅ Agent 调用有响应
 - ✅ 技能自动匹配正常
@@ -398,16 +459,23 @@ Smart Flow v2.0 测试通过的标准：
 ### 测试日期: 2025-01-07
 ### 测试人: [你的名字]
 ### Claude Code 版本: [版本号]
+### Smart Flow 版本: v2.0.1
 
 #### 测试结果
 
 1. 帮助信息: ✅/❌
    - 备注: [具体描述]
 
-2. Agent 调用: ✅/❌
+2. **需求澄清工具调用**: ✅/❌
+   - 备注: [是否弹出选项界面？这是最关键的！]
+
+3. Smart Flow 完整流程: ✅/❌
+   - 备注: [阶段 1 是否弹出选项界面？]
+
+4. Agent 调用: ✅/❌
    - 备注: [具体描述]
 
-3. 技能使用: ✅/❌
+5. 技能使用: ✅/❌
    - 备注: [具体描述]
 
 #### 发现的问题
@@ -425,12 +493,23 @@ Smart Flow v2.0 测试通过的标准：
 
 ## 🚀 开始测试吧！
 
-现在你可以按照上面的测试计划，逐步测试 Smart Flow v2.0 的所有功能。
+现在你可以按照上面的测试计划，逐步测试 Smart Flow v2.0.1 的所有功能。
 
 **建议测试顺序**:
-1. 先测试简单的（帮助、斜杠命令）
-2. 再测试 Agent 调用
-3. 然后测试技能使用
-4. 最后测试完整工作流
+1. **先测试"测试 1.2 - 需求澄清工具调用"** ⭐（验证修复效果）
+2. 然后测试"测试 1.3 - 完整 Smart Flow 工作流"
+3. 再测试 Agent 调用
+4. 然后测试技能使用
+5. 最后测试斜杠命令
 
 祝测试顺利！ 🎉
+
+---
+
+## 📮 反馈渠道
+
+如果测试中发现问题：
+1. 记录具体失败场景
+2. 检查插件版本是否为 v2.0.1
+3. 尝试强制更新插件
+4. 如果问题依然存在，提交 Issue 到 GitHub
