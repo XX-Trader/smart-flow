@@ -45,16 +45,34 @@ Smart Flow 是一个全自动化的开发工作流插件，通过**需求澄清�
 
 ### 安装
 
+#### 方法 1: 通过市场安装（推荐）
+
+```bash
+# 1. 注册市场
+/plugin marketplace add XX-Trader/smart-flow-marketplace
+
+# 2. 安装插件
+/plugin install smart-flow@smart-flow-marketplace
+
+# 3. 验证安装
+/help
+# 应该看到 /smart-flow 和 /sf 命令
+```
+
+#### 方法 2: 手动克隆安装
+
 ```bash
 # 1. 克隆插件
 cd ~/.claude/plugins
-git clone https://github.com/YOUR-USERNAME/smart-flow.git
+git clone https://github.com/XX-Trader/smart-flow.git
 
 # 2. 配置 Claude Code
 # 在 ~/.claude/CLAUDE.md 中添加:
 # ## Smart Flow
 # When user wants to build a feature, use smart-flow skills.
 ```
+
+详细安装指南请参考 [市场安装指南](MARKET_INSTALL.md) 或 [完整安装文档](INSTALL.md)
 
 ### 使用
 

@@ -1,0 +1,44 @@
+{
+  "name": "smart-flow",
+  "description": "智能任务调度插件 - 通过需求澄清、任务分解、并行执行、结果整合四大阶段，大幅提升开发效率。支持 67+ 专业 Agent。",
+  "version": "1.0.0",
+  "author": {
+    "name": "XX-Trader",
+    "email": "your-email@example.com"
+  },
+  "homepage": "https://github.com/XX-Trader/smart-flow",
+  "repository": "https://github.com/XX-Trader/smart-flow",
+  "license": "MIT",
+  "keywords": [
+    "workflow",
+    "task-management",
+    "agent-orchestration",
+    "requirements-clarity",
+    "parallel-execution",
+    "smart-flow"
+  ],
+  "skills": [
+    "smart-flow:smart-workflow",
+    "smart-flow:requirements-clarity",
+    "smart-flow:task-decomposer",
+    "smart-flow:parallel-executor",
+    "smart-flow:result-synthesizer"
+  ],
+  "commands": [
+    {
+      "name": "/smart-flow",
+      "description": "启动智能任务调度流程"
+    },
+    {
+      "name": "/sf",
+      "description": "智能任务调度快捷命令"
+    }
+  ],
+  "capabilities": [
+    "auto-requirements-clarification",
+    "multi-agent-parallel-execution",
+    "task-decomposition",
+    "result-synthesis",
+    "support-67-agents"
+  ]
+}
