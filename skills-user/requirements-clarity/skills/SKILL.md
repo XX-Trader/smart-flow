@@ -140,25 +140,42 @@ Identify missing information across four dimensions:
 
 ### Step 3: Interactive Clarification
 
+**⚠️ 强制要求**: 必须使用 `AskUserQuestion` 工具！
+
+**执行步骤**:
+1. **立即调用 `AskUserQuestion` 工具**
+   - 设计 2-4 个关键问题（根据当前缺口确定）
+   - 每个问题提供 2-4 个选项（或 Other 允许自定义输入）
+   - 支持多选时设置 `multiSelect: true`
+
+2. **等待用户回答**
+   - 不要假设用户想要什么
+   - 不要自己编造需求
+
+3. **更新清晰度分数并继续**
+   - 根据用户回答更新清晰度分数
+   - 如果分数 < 90，继续下一轮提问
+   - 如果分数 ≥ 90，生成 PRD 文档
+
 **Question Strategy**:
 1. Start with highest-impact gaps
-2. Ask 2-3 questions per round
+2. Ask 2-3 questions per round (using `AskUserQuestion` tool)
 3. Build context progressively
 4. Use user's language
 5. Provide examples when helpful
 
-**Question Format**:
+**Tool Usage Example**:
+```
+Call AskUserQuestion with:
+- questions: Array of 2-4 question objects
+- Each question has: header, question, options (array of 2-4), multiSelect
+```
+
+**Question Format** (for reference only, actual tool call required):
 ```markdown
 I need to clarify the following points to complete the requirements document:
 
-1. **[Category]**: [Specific question]?
-   - For example: [Example if helpful]
-
-2. **[Category]**: [Specific question]?
-
-3. **[Category]**: [Specific question]?
-
-Please provide your answers, and I'll continue refining the PRD.
+[Use AskUserQuestion tool to ask these questions]
 ```
 
 **After Each User Response**:

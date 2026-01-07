@@ -5,6 +5,25 @@ description: "Use when user wants to build something but requirements are unclea
 
 # Requirements Clarity - 需求澄清
 
+## ⚠️ 强制执行要求
+
+**你必须使用 `AskUserQuestion` 工具来收集用户需求！**
+
+当这个技能被触发时，你**必须**执行以下步骤：
+
+1. **立即调用 `AskUserQuestion` 工具**
+   - 设计 2-4 个关键问题
+   - 每个问题提供 2-4 个选项
+   - 支持多选时设置 `multiSelect: true`
+
+2. **等待用户回答**
+   - 不要假设用户想要什么
+   - 不要自己编造需求
+
+3. **生成结构化需求文档**
+   - 基于用户的回答
+   - 输出 JSON 格式的需求文档
+
 ## 概述
 
 **核心原则**: 拒绝猜测，强制询问
