@@ -5,6 +5,62 @@ description: "Use when tasks are decomposed and user confirmed configuration. Ex
 
 # Parallel Executor - 并行执行引擎
 
+## ⚠️ 强制执行要求
+
+**你必须使用 Task 工具的 `run_in_background: true` 参数来并行执行多个 agent！**
+
+**关键原则**：在一条消息中同时调用多个 Task 工具，而不是串行调用！
+
+### ❌ 错误做法（串行执行）
+
+```typescript
+// 错误：一个接一个调用 agent，无法并行
+Task({
+  subagent_type: "product-manager",
+  prompt: "...",
+  run_in_background: true
+})
+
+// 等待完成后再调用下一个 - 这是串行！
+Task({
+  subagent_type: "ui-ux-designer",
+  prompt: "...",
+  run_in_background: true
+})
+```
+
+### ✅ 正确做法（并行执行）
+
+```typescript
+// 正确：在一条消息中同时启动多个 agent
+Task({
+  subagent_type: "product-manager",
+  prompt: "...",
+  description: "编写 PRD",
+  run_in_background: true
+})
+
+Task({
+  subagent_type: "ui-ux-designer",
+  prompt: "...",
+  description: "UI 设计",
+  run_in_background: true
+})
+
+Task({
+  subagent_type: "database-architect",
+  prompt: "...",
+  description: "数据库设计",
+  run_in_background: true
+})
+
+// 三条 Task 调用在同一条消息中 = 并行执行
+```
+
+**记住**：多条 Task 调用必须在**同一条消息**中发送，才能真正并行！
+
+---
+
 ## 概述
 
 **核心原则**: 同时启动多个专业 agent，最大化并行效率，实时显示进度
