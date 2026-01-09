@@ -1,3 +1,4 @@
+【自用不完善】
 # Smart Flow - Claude Code 智能任务调度插件 v2.1
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
@@ -90,10 +91,10 @@
 
 ```bash
 # 1. 注册市场
-/plugin marketplace add XX-Trader/smart-flow-marketplace
+/plugin marketplace add XX-Trader/smart-flow
 
 # 2. 安装插件
-/plugin install smart-flow@smart-flow-marketplace
+/plugin install smart-flow@smart-flow
 
 # 3. 验证安装
 /help
