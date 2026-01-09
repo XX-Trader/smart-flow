@@ -65,3 +65,7 @@ logs/
 
 # OS
 Thumbs.db
+
+# Reference repositories (not part of this project)
+../claude-code-infrastructure-showcase-main/
+../superpowers-main/
