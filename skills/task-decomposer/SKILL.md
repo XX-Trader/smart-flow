@@ -1,15 +1,20 @@
 ---
 name: task-decomposer
-description: "Use when requirements are clear. Automatically decomposes requirements into tasks, recommends optimal agent combinations, and generates execution plan."
+description: "Use when requirements are clear. Recommends agent combinations and requires user confirmation before execution."
 ---
 
 # Task Decomposer - 任务分解器
 
 ## 概述
 
-**核心原则**: 自动识别需要哪些专业领域，智能推荐 Agent 组合和并行策略
+**核心原则**: 推荐 Agent 组合 + **强制用户确认**
 
-基于已澄清的需求，智能识别需要哪些专业 agent，生成任务清单、依赖关系和执行顺序。
+基于已澄清的需求：
+1. **推荐**适合的 Agent 组合（基于需求关键词）
+2. **展示**推荐的 Agent 和执行计划
+3. **使用 AskUserQuestion 让用户选择**：接受推荐、调整或自定义
+
+**重要**: 用户必须最终确认 Agent 选择，不能自动执行！
 
 ## 输入
 
@@ -17,89 +22,75 @@ description: "Use when requirements are clear. Automatically decomposes requirem
 
 ---
 
-## 🎯 智能推荐系统
+## 🎯 Agent 推荐系统
 
-### Step 1: 任务复杂度评估
+### 推荐 Agent（基于需求关键词）
 
-**参考**: `utils/smart-recommender.md`
+根据需求中的关键词，推荐合适的 Agent：
 
-```yaml
-评估维度:
-  功能数量: [1-3个 | 4-7个 | 8+个]
-  技术栈数量: [1-2个 | 3-4个 | 5+个]
-  集成复杂度: [无 | 1-2个API | 3+个系统]
-  数据复杂度: [简单CRUD | 多表关联 | 分布式]
-  用户规模: [个人 | 小团队 | 企业级]
+**产品 & 设计类**:
+- 需求关键词: "用户需求"、"功能模块"、"UI"、"界面"、"设计" → product-manager, ui-ux-designer
 
-复杂度计算:
-  简单: 0-40分
-  中等: 41-70分
-  复杂: 71-100分
-```
+**架构 & 开发类**:
+- 需求关键词: "架构"、"API"、"前端"、"后端"、"数据库" → backend-architect, frontend-developer, database-architect
 
-### Step 2: 推荐 Agent 组合
+**测试 & 质量类**:
+- 需求关键词: "测试"、"质量"、"安全" → test-automator, security-auditor, code-reviewer
 
-```yaml
-简单任务 (0-40分):
-  推荐Agent: 2个
-    - product-manager
-    - frontend-developer
-  并行数: 2个
+**部署 & 运维类**:
+- 需求关键词: "部署"、"上线"、"运维" → deployment-engineer
 
-中等任务 (41-70分):
-  推荐Agent: 5个
-    批次1 (并行):
-      - product-manager
-      - ui-ux-designer
-      - database-architect
-    批次2 (并行):
-      - backend-architect
-      - frontend-developer
-      - backend-developer
-  并行数: 3-4个
+### 推荐并行策略
 
-复杂任务 (71-100分):
-  推荐Agent: 8个
-    批次1 (并行):
-      - product-manager
-      - ui-ux-designer
-      - database-architect
-      - architect-review
-    批次2 (并行):
-      - backend-architect
-      - frontend-developer
-      - backend-developer
-      - api-documenter
-    批次3 (并行):
-      - test-automator
-      - security-auditor
-      - performance-engineer
-      - code-reviewer
-  并行数: 5-7个
-```
+**简单任务** (1-2个功能): 2-3 个 Agent，并行数 2
+**中等任务** (3-5个功能): 5-6 个 Agent，并行数 3-4
+**复杂任务** (6+个功能): 8+ 个 Agent，并行数 5-7
 
-### Step 3: 用户配置界面
+---
 
-**使用 `AskUserQuestion` 工具**：
+## ⚠️ 强制用户确认
+
+**必须使用 `AskUserQuestion` 工具获取用户确认！**
 
 ```markdown
-## Smart Flow Agent 配置
+## Smart Flow Agent 推荐
 
-智能推荐已根据您的需求分析:
-- **复杂度**: [简单/中等/复杂] ([X]/100分)
-- **推荐 Agent**: [X]个
-- **推荐并行数**: [X]个
+基于您的需求，我推荐以下 Agent：
 
-### 核心开发 Agent (已预选)
+### 推荐的核心 Agent
 
-以下 Agent 已根据需求智能推荐并预选:
+[ ] product-manager (产品经理) - 编写 PRD 文档
+[ ] ui-ux-designer (UI/UX 设计师) - 设计界面和交互
+[ ] database-architect (数据库架构师) - 设计数据模型
+[ ] backend-architect (后端架构师) - 设计 API 和技术架构
+[ ] frontend-developer (前端开发) - 实现用户界面
+[ ] backend-developer (后端开发) - 实现业务逻辑
 
-[✓] product-manager (产品经理)
-[✓] ui-ux-designer (UI/UX 设计师)
-[✓] database-architect (数据库架构师)
-[✓] backend-architect (后端架构师)
-[✓] frontend-developer (前端开发)
-[✓] backend-developer (后端开发)
+### 可选 Agent
+
+[ ] test-automator (测试自动化) - 编写测试用例
+[ ] security-auditor (安全审计) - 安全审查
+[ ] api-documenter (API 文档) - 编写 API 文档
+[ ] code-reviewer (代码审查) - 代码质量审查
+
+### 执行配置
+
+**并行数量**:
+  ( ) 2个 (稳定)
+  ( ) 3-4个 (推荐)
+  ( ) 5-7个 (快速)
+
+### 您的选择？
+
+1. **接受推荐** - 使用推荐的 Agent
+2. **调整 Agent** - 增减或替换 Agent
+3. **自定义配置** - 完全自定义 Agent 组合
+```
+
+**实现**:
+- 用户选择 "接受推荐" → 使用推荐的 Agent 继续执行
+- 用户选择 "调整 Agent" → 显示 Agent 列表让用户勾选
+- 用户选择 "自定义" → 显示完整 Agent 列表让用户选择
 
 ### 可选 Agent
 
