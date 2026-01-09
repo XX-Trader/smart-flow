@@ -1,8 +1,9 @@
 # Smart Flow - 统一资源索引
 
-> **最后更新**: 2025-01-07
-> **版本**: v2.0.0 (全量整合版)
-> **资源总量**: 122 个 Agent + 132 个技能 + 11 个命令
+> **最后更新**: 2025-01-10
+> **版本**: v2.1.0 (Showcase 整合版)
+> **资源总量**: 129 个 Agent + 132 个技能 + 11 个命令
+> **新增**: 8 个 Showcase 精选 Agents + 自动触发 Hooks
 
 ---
 
@@ -17,9 +18,10 @@
 | **用户子技能** | 40 | `skills-sub/` |
 | **Superpowers 技能** | 14 | `skills-superpowers/` |
 | **官方插件技能** | 68 | `skills-plugins/` |
-| **Agent 定义** | 122 | `agents/` |
+| **Agent 定义** | 129 | `agents/` (+7 Showcase) |
+| **自动触发 Hooks** | 2 | `.claude/hooks/` (新增) |
 | **斜杠命令** | 11 | `commands/` |
-| **总计** | **268** | - |
+| **总计** | **279** | - |
 
 ### 技能分类统计
 
@@ -110,9 +112,22 @@
 
 ---
 
-## 🤖 Agent 索引（122 个）
+## 🤖 Agent 索引（129 个）
 
-Smart Flow 支持 **122 个专业 Agent**，按领域分类：
+Smart Flow 支持 **129 个专业 Agent**，按领域分类：
+
+### 🆕 Showcase 精选 Agents (8个新增)
+
+| Agent | 来源 | 功能 |
+|-------|------|------|
+| **plan-reviewer_showcase** | showcase | 实施前计划审查，识别潜在问题 |
+| **refactor-planner_showcase** | showcase | 创建详细重构计划和风险评估 |
+| **code-refactor-master_showcase** | showcase | 执行复杂重构，追踪依赖关系 |
+| **auto-error-resolver_showcase** | showcase | 自动修复 TypeScript 编译错误 |
+| **frontend-error-fixer_showcase** | showcase | 调试和修复前端错误 |
+| **code-architecture-reviewer_showcase** | showcase | 审查代码架构一致性和最佳实践 |
+| **web-research-specialist_showcase** | showcase | 创意搜索和深度研究 |
+| **documentation-architect_showcase** | showcase | 生成全面的技术文档 |
 
 ### 核心开发（20+）
 - `product-manager` - 产品经理
@@ -396,6 +411,14 @@ You are a specialist in...
 ---
 
 ## 📝 版本历史
+
+### v2.1.0 (2025-01-10) - Showcase 整合版
+- ✅ 新增 8 个 Showcase 精选 Agents
+- ✅ 新增自动触发 Hooks (smart-flow-trigger)
+- ✅ 新增 smart-flow-rules.json 配置
+- ✅ 拆分 smart-workflow 资源文件
+- ✅ 更新统一索引
+- ✅ 总资源量: 129 Agents + 132 技能 + 11 命令
 
 ### v2.0.0 (2025-01-07) - 全量整合版
 - ✅ 整合 122 个 Agent

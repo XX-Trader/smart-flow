@@ -1,0 +1,162 @@
+{
+  "version": "1.0.0",
+  "lastUpdated": "2025-01-10",
+  "skillName": "smart-workflow",
+  "description": "Smart Flow 自动触发规则配置",
+
+  "autoTrigger": {
+    "enabled": true,
+    "keywords": [
+      "新增",
+      "开发",
+      "实现",
+      "制作",
+      "创建",
+      "功能",
+      "模块",
+      "页面",
+      "接口",
+      "build",
+      "develop",
+      "implement",
+      "create",
+      "feature",
+      "add",
+      "make"
+    ],
+    "intentPatterns": [
+      "(帮我|帮我做个|做一个|做一个功能).{0,50}",
+      "(新增|开发|实现|制作|创建).{0,30}(功能|模块|页面|接口)",
+      "(应该|大概|可能|像).{0,50}(实现|做|开发)"
+    ],
+    "vagueTerms": [
+      "大概",
+      "可能",
+      "应该",
+      "像",
+      "好像",
+      "差不多"
+    ],
+    "minLength": 50,
+    "skipWhenExplicit": [
+      "/smart-flow",
+      "/sf",
+      "smart-flow",
+      "smartflow"
+    ]
+  },
+
+  "stages": {
+    "requirements": {
+      "enabled": true,
+      "agent": "requirements-clarity",
+      "questions": [
+        {
+          "id": "goal",
+          "question": "这个功能的主要目标是什么？",
+          "type": "text",
+          "required": true
+        },
+        {
+          "id": "users",
+          "question": "谁会使用这个功能？",
+          "type": "choice",
+          "options": ["普通用户", "管理员", "开发者", "其他"],
+          "required": true
+        },
+        {
+          "id": "coreFeatures",
+          "question": "哪些是必须功能？哪些是可选功能？",
+          "type": "multiSelect",
+          "required": true
+        },
+        {
+          "id": "techStack",
+          "question": "有特定的技术栈偏好吗？",
+          "type": "multiSelect",
+          "options": ["无偏好", "React", "Vue", "Django", "FastAPI", "Node.js"],
+          "required": false
+        }
+      ]
+    },
+    "decomposition": {
+      "enabled": true,
+      "agent": "task-decomposer",
+      "strategy": "keyword-matching",
+      "maxParallel": 5
+    },
+    "execution": {
+      "enabled": true,
+      "mode": "parallel",
+      "maxParallel": 5,
+      "timeout": 600000
+    },
+    "synthesis": {
+      "enabled": true,
+      "format": "markdown",
+      "include": [
+        "requirements",
+        "design",
+        "architecture",
+        "code",
+        "tests",
+        "security"
+      ]
+    }
+  },
+
+  "showcaseAgents": {
+    "plan-reviewer": {
+      "file": "plan-reviewer_showcase.md",
+      "trigger": "审查计划|review plan|计划评审|验证计划",
+      "description": "实施前审查计划，找出潜在问题和缺失考虑"
+    },
+    "refactor-planner": {
+      "file": "refactor-planner_showcase.md",
+      "trigger": "重构计划|refactor plan|代码重构|重构代码",
+      "description": "创建详细的重构计划和风险评估"
+    },
+    "code-refactor-master": {
+      "file": "code-refactor-master_showcase.md",
+      "trigger": "执行重构|代码重构|refactor code|重组代码",
+      "description": "执行复杂重构，追踪依赖关系"
+    },
+    "auto-error-resolver": {
+      "file": "auto-error-resolver_showcase.md",
+      "trigger": "修复编译错误|TypeScript 错误|tsc error|编译失败",
+      "description": "自动修复 TypeScript 编译错误"
+    },
+    "frontend-error-fixer": {
+      "file": "frontend-error-fixer_showcase.md",
+      "trigger": "前端错误|React 错误|frontend error|浏览器错误",
+      "description": "调试和修复前端错误"
+    },
+    "code-architecture-reviewer": {
+      "file": "code-architecture-reviewer_showcase.md",
+      "trigger": "架构审查|代码审查|architecture review|代码质量",
+      "description": "审查代码架构一致性和最佳实践"
+    },
+    "web-research-specialist": {
+      "file": "web-research-specialist_showcase.md",
+      "trigger": "网络搜索|web research|搜索资料|技术调研",
+      "description": "创意搜索和深度研究"
+    },
+    "documentation-architect": {
+      "file": "documentation-architect_showcase.md",
+      "trigger": "生成文档|编写文档|documentation|技术文档",
+      "description": "生成全面的技术文档"
+    }
+  },
+
+  "categoryMappings": {
+    "产品": ["product-manager", "business-analyst"],
+    "设计": ["ui-ux-designer", "frontend-developer"],
+    "后端": ["backend-architect", "backend-developer"],
+    "前端": ["frontend-developer", "nextjs-developer", "react-performance-optimization"],
+    "数据库": ["database-architect", "database-optimizer", "sql-expert"],
+    "测试": ["test-automator", "test-driven-development"],
+    "安全": ["security-auditor"],
+    "部署": ["deployment-engineer", "devops-troubleshooter"],
+    "文档": ["documentation-architect", "api-documenter"]
+  }
+}

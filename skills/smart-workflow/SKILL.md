@@ -33,19 +33,8 @@ Smart Workflow 是一个全自动化的开发工作流，通过需求澄清、�
 
 **执行步骤**:
 1. **立即调用 `AskUserQuestion` 工具**
-   - 设计 2-4 个关键问题
-   - 每个问题提供 2-4 个选项
-   - 支持多选时设置 `multiSelect: true`
-
-2. **等待用户回答**
-   - 不要假设用户想要什么
-   - 不要自己编造需求
-
+2. **等待用户回答** - 不要假设用户想要什么
 3. **生成结构化需求文档**
-   - 基于用户的回答
-   - 输出 JSON 格式
-
-**目标**: 强制询问，不允许猜测
 
 **核心问题**:
 1. **功能目标**: 解决什么问题？达到什么效果？
@@ -55,7 +44,7 @@ Smart Workflow 是一个全自动化的开发工作流，通过需求澄清、�
 5. **约束条件**: 时间/性能/安全/兼容性方面的约束？
 6. **参考资料**: 有类似的实现或竞品可以参考吗？
 
-**输出**: 结构化需求文档 (JSON 格式)
+**详细说明**: [resources/requirements-clarity.md](resources/requirements-clarity.md)
 
 **技能**: `smart-flow:requirements-clarity`
 
@@ -65,26 +54,9 @@ Smart Workflow 是一个全自动化的开发工作流，通过需求澄清、�
 
 **目标**: 自动识别需要哪些专业领域
 
-**分解逻辑**:
-```python
-需求关键词 → 专业 Agent (智能匹配)
+**分解逻辑**: 需求关键词 → 专业 Agent (智能匹配)
 
-# 示例
-["用户界面", "UI", "页面", "交互"]
-→ ui-ux-designer + frontend-developer
-
-["数据库", "数据模型", "表结构", "ER图"]
-→ database-architect
-
-["API", "接口", "REST", "GraphQL"]
-→ backend-architect + api-documenter
-
-["测试", "质量", "测试用例"]
-→ test-automator
-
-["安全", "漏洞", "认证", "权限"]
-→ security-auditor
-```
+**详细说明**: [resources/task-decomposition.md](resources/task-decomposition.md)
 
 **输出**: 任务清单 (包含依赖关系和优先级)
 
@@ -117,6 +89,8 @@ Smart Workflow 是一个全自动化的开发工作流，通过需求澄清、�
   ✅ security-auditor (安全专家) [依赖: 前后端代码]
 ```
 
+**详细说明**: [resources/parallel-execution.md](resources/parallel-execution.md)
+
 **技能**: `smart-flow:parallel-executor`
 
 ---
@@ -134,6 +108,8 @@ Smart Workflow 是一个全自动化的开发工作流，通过需求澄清、�
 6. **安全维度**: 安全审查报告
 
 **输出**: Markdown 格式的完整报告
+
+**详细说明**: [resources/result-synthesis.md](resources/result-synthesis.md)
 
 **技能**: `smart-flow:result-synthesizer`
 
