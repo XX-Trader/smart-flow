@@ -1,7 +1,54 @@
 ---
 name: skill-creator
+displayName: "技能创建器"
+version: "1.0.0"
 description: Guide for creating effective skills. This skill should be used when users want to create a new skill (or update an existing skill) that extends Claude's capabilities with specialized knowledge, workflows, or tool integrations.
-license: Complete terms in LICENSE.txt
+
+triggers:
+  keywords:
+    "skill"
+    "creator"
+  auto_trigger: false
+  confidence_threshold: 0.6
+
+tools:
+  required:
+    - Read
+    - Write
+  optional:
+    - Bash
+    - Edit
+
+permissions:
+  level: "write"
+  scope:
+    - "file:read"
+    - "file:write"
+
+context:
+  mode: inline
+  isolation: false
+  max_context_tokens: 50000
+
+hot_reload: true
+progressive_load: true
+
+metadata:
+  category: "plugin"
+  tags:
+    "skill"
+    "creator"
+  author: "Smart Flow Team"
+  license: "Complete terms in LICENSE.txt"
+  updated_at: "2026-01-12"
+
+scope:
+  level: "project"
+  priority: 40
+
+compatibility:
+  claude_code_min_version: "2026.01.0"
+  requires_restart: false
 ---
 
 # Skill Creator

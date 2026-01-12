@@ -1,7 +1,56 @@
 ---
 name: windows-fullstack-deploy
+displayName: "Windows 全栈部署"
+version: "1.0.0"
 description: Windows 本地开发环境自动化部署技能。支持 Django/FastAPI/Flask 后端、Vue3/React 前端、MySQL 数据库、Redis 缓存的完整本地开发流程。当用户在 Windows 上搭建本地开发环境时使用此技能。支持项目自动检测、配置文件驱动、一键启动所有服务。
-license: MIT
+
+triggers:
+  keywords:
+    "windows"
+    "fullstack"
+    "deploy"
+  auto_trigger: false
+  confidence_threshold: 0.6
+
+tools:
+  required:
+    - Read
+    - Write
+  optional:
+    - Bash
+    - Edit
+
+permissions:
+  level: "write"
+  scope:
+    - "file:read"
+    - "file:write"
+
+context:
+  mode: inline
+  isolation: false
+  max_context_tokens: 50000
+
+hot_reload: true
+progressive_load: true
+
+metadata:
+  category: "deployment"
+  tags:
+    "windows"
+    "fullstack"
+    "deploy"
+  author: "Smart Flow Team"
+  license: "MIT"
+  updated_at: "2026-01-12"
+
+scope:
+  level: "project"
+  priority: 40
+
+compatibility:
+  claude_code_min_version: "2026.01.0"
+  requires_restart: false
 ---
 
 # Windows 全栈项目本地部署技能

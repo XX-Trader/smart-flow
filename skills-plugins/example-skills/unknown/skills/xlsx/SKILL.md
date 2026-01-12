@@ -1,7 +1,52 @@
 ---
 name: xlsx
+displayName: "Excel 表格"
+version: "1.0.0"
 description: "Comprehensive spreadsheet creation, editing, and analysis with support for formulas, formatting, data analysis, and visualization. When Claude needs to work with spreadsheets (.xlsx, .xlsm, .csv, .tsv, etc) for: (1) Creating new spreadsheets with formulas and formatting, (2) Reading or analyzing data, (3) Modify existing spreadsheets while preserving formulas, (4) Data analysis and visualization in spreadsheets, or (5) Recalculating formulas"
-license: Proprietary. LICENSE.txt has complete terms
+
+triggers:
+  keywords:
+    "xlsx"
+  auto_trigger: false
+  confidence_threshold: 0.6
+
+tools:
+  required:
+    - Read
+    - Write
+  optional:
+    - Bash
+    - Edit
+
+permissions:
+  level: "write"
+  scope:
+    - "file:read"
+    - "file:write"
+
+context:
+  mode: inline
+  isolation: false
+  max_context_tokens: 50000
+
+hot_reload: true
+progressive_load: true
+
+metadata:
+  category: "plugin"
+  tags:
+    "xlsx"
+  author: "Smart Flow Team"
+  license: "Proprietary. LICENSE.txt has complete terms"
+  updated_at: "2026-01-12"
+
+scope:
+  level: "project"
+  priority: 40
+
+compatibility:
+  claude_code_min_version: "2026.01.0"
+  requires_restart: false
 ---
 
 # Requirements for Outputs

@@ -1,6 +1,52 @@
 ---
 name: Requirements Clarity
+displayName: "Requirements Clarity"
+version: "1.0.0"
 description: Clarify ambiguous requirements through focused dialogue before implementation. Use when requirements are unclear, features are complex (>2 days), or involve cross-team coordination. Ask two core questions - Why? (YAGNI check) and Simpler? (KISS check) - to ensure clarity before coding.
+
+triggers:
+  keywords:
+    "Requirements Clarity"
+  auto_trigger: false
+  confidence_threshold: 0.6
+
+tools:
+  required:
+    - Read
+    - Write
+  optional:
+    - Bash
+    - Edit
+
+permissions:
+  level: "write"
+  scope:
+    - "file:read"
+    - "file:write"
+
+context:
+  mode: inline
+  isolation: false
+  max_context_tokens: 50000
+
+hot_reload: true
+progressive_load: true
+
+metadata:
+  category: "plugin"
+  tags:
+    "Requirements Clarity"
+  author: "Smart Flow Team"
+  license: "MIT"
+  updated_at: "2026-01-12"
+
+scope:
+  level: "project"
+  priority: 40
+
+compatibility:
+  claude_code_min_version: "2026.01.0"
+  requires_restart: false
 ---
 
 # Requirements Clarity Skill

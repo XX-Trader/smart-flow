@@ -1,7 +1,54 @@
 ---
 name: feature-development
+displayName: "功能开发"
+version: "1.0.0"
 description: Django + Vue 全栈功能开发标准化流程。支持需求分析、技术方案设计、API设计、数据库设计、UI原型设计的完整开发流程。根据功能复杂度自动选择开发流程：简单功能（直接实施）、中等功能（2个表及以上/前后端联动）、复杂功能（技术可行性评估）。
-license: MIT
+
+triggers:
+  keywords:
+    "feature"
+    "development"
+  auto_trigger: false
+  confidence_threshold: 0.6
+
+tools:
+  required:
+    - Read
+    - Write
+  optional:
+    - Bash
+    - Edit
+
+permissions:
+  level: "write"
+  scope:
+    - "file:read"
+    - "file:write"
+
+context:
+  mode: inline
+  isolation: false
+  max_context_tokens: 50000
+
+hot_reload: true
+progressive_load: true
+
+metadata:
+  category: "plugin"
+  tags:
+    "feature"
+    "development"
+  author: "Smart Flow Team"
+  license: "MIT"
+  updated_at: "2026-01-12"
+
+scope:
+  level: "project"
+  priority: 40
+
+compatibility:
+  claude_code_min_version: "2026.01.0"
+  requires_restart: false
 ---
 
 # Django + Vue 功能开发标准化流程

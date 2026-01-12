@@ -1,7 +1,56 @@
 ---
 name: web-artifacts-builder
+displayName: "Web 构建器"
+version: "1.0.0"
 description: Suite of tools for creating elaborate, multi-component claude.ai HTML artifacts using modern frontend web technologies (React, Tailwind CSS, shadcn/ui). Use for complex artifacts requiring state management, routing, or shadcn/ui components - not for simple single-file HTML/JSX artifacts.
-license: Complete terms in LICENSE.txt
+
+triggers:
+  keywords:
+    "web"
+    "artifacts"
+    "builder"
+  auto_trigger: false
+  confidence_threshold: 0.6
+
+tools:
+  required:
+    - Read
+    - Write
+  optional:
+    - Bash
+    - Edit
+
+permissions:
+  level: "write"
+  scope:
+    - "file:read"
+    - "file:write"
+
+context:
+  mode: inline
+  isolation: false
+  max_context_tokens: 50000
+
+hot_reload: true
+progressive_load: true
+
+metadata:
+  category: "web"
+  tags:
+    "web"
+    "artifacts"
+    "builder"
+  author: "Smart Flow Team"
+  license: "Complete terms in LICENSE.txt"
+  updated_at: "2026-01-12"
+
+scope:
+  level: "project"
+  priority: 40
+
+compatibility:
+  claude_code_min_version: "2026.01.0"
+  requires_restart: false
 ---
 
 # Web Artifacts Builder

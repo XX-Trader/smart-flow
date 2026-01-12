@@ -1,7 +1,52 @@
 ---
 name: pdf
+displayName: "PDF 处理"
+version: "1.0.0"
 description: Comprehensive PDF manipulation toolkit for extracting text and tables, creating new PDFs, merging/splitting documents, and handling forms. When Claude needs to fill in a PDF form or programmatically process, generate, or analyze PDF documents at scale.
-license: Proprietary. LICENSE.txt has complete terms
+
+triggers:
+  keywords:
+    "pdf"
+  auto_trigger: false
+  confidence_threshold: 0.6
+
+tools:
+  required:
+    - Read
+    - Write
+  optional:
+    - Bash
+    - Edit
+
+permissions:
+  level: "write"
+  scope:
+    - "file:read"
+    - "file:write"
+
+context:
+  mode: inline
+  isolation: false
+  max_context_tokens: 50000
+
+hot_reload: true
+progressive_load: true
+
+metadata:
+  category: "document"
+  tags:
+    "pdf"
+  author: "Smart Flow Team"
+  license: "Proprietary. LICENSE.txt has complete terms"
+  updated_at: "2026-01-12"
+
+scope:
+  level: "project"
+  priority: 40
+
+compatibility:
+  claude_code_min_version: "2026.01.0"
+  requires_restart: false
 ---
 
 # PDF Processing Guide

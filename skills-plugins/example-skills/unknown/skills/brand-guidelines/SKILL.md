@@ -1,7 +1,54 @@
 ---
 name: brand-guidelines
+displayName: "品牌指南"
+version: "1.0.0"
 description: Applies Anthropic's official brand colors and typography to any sort of artifact that may benefit from having Anthropic's look-and-feel. Use it when brand colors or style guidelines, visual formatting, or company design standards apply.
-license: Complete terms in LICENSE.txt
+
+triggers:
+  keywords:
+    "brand"
+    "guidelines"
+  auto_trigger: false
+  confidence_threshold: 0.6
+
+tools:
+  required:
+    - Read
+    - Write
+  optional:
+    - Bash
+    - Edit
+
+permissions:
+  level: "write"
+  scope:
+    - "file:read"
+    - "file:write"
+
+context:
+  mode: inline
+  isolation: false
+  max_context_tokens: 50000
+
+hot_reload: true
+progressive_load: true
+
+metadata:
+  category: "plugin"
+  tags:
+    "brand"
+    "guidelines"
+  author: "Smart Flow Team"
+  license: "Complete terms in LICENSE.txt"
+  updated_at: "2026-01-12"
+
+scope:
+  level: "project"
+  priority: 40
+
+compatibility:
+  claude_code_min_version: "2026.01.0"
+  requires_restart: false
 ---
 
 # Anthropic Brand Styling

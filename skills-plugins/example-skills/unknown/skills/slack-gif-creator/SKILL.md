@@ -1,7 +1,56 @@
 ---
 name: slack-gif-creator
+displayName: "Slack GIF 创建"
+version: "1.0.0"
 description: Knowledge and utilities for creating animated GIFs optimized for Slack. Provides constraints, validation tools, and animation concepts. Use when users request animated GIFs for Slack like "make me a GIF of X doing Y for Slack."
-license: Complete terms in LICENSE.txt
+
+triggers:
+  keywords:
+    "slack"
+    "gif"
+    "creator"
+  auto_trigger: false
+  confidence_threshold: 0.6
+
+tools:
+  required:
+    - Read
+    - Write
+  optional:
+    - Bash
+    - Edit
+
+permissions:
+  level: "write"
+  scope:
+    - "file:read"
+    - "file:write"
+
+context:
+  mode: inline
+  isolation: false
+  max_context_tokens: 50000
+
+hot_reload: true
+progressive_load: true
+
+metadata:
+  category: "plugin"
+  tags:
+    "slack"
+    "gif"
+    "creator"
+  author: "Smart Flow Team"
+  license: "Complete terms in LICENSE.txt"
+  updated_at: "2026-01-12"
+
+scope:
+  level: "project"
+  priority: 40
+
+compatibility:
+  claude_code_min_version: "2026.01.0"
+  requires_restart: false
 ---
 
 # Slack GIF Creator

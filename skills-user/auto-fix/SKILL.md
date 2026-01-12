@@ -1,7 +1,54 @@
 ---
 name: auto-fix
+displayName: "自动修复"
+version: "1.0.0"
 description: 全自动测试-修复循环系统。自动运行测试、分析问题、修复代码、验证修复、Git 提交，直到所有测试通过。适用于 Django + Vue 全栈项目。
-license: MIT
+
+triggers:
+  keywords:
+    "auto"
+    "fix"
+  auto_trigger: false
+  confidence_threshold: 0.6
+
+tools:
+  required:
+    - Read
+    - Write
+  optional:
+    - Bash
+    - Edit
+
+permissions:
+  level: "write"
+  scope:
+    - "file:read"
+    - "file:write"
+
+context:
+  mode: inline
+  isolation: false
+  max_context_tokens: 50000
+
+hot_reload: true
+progressive_load: true
+
+metadata:
+  category: "testing"
+  tags:
+    "auto"
+    "fix"
+  author: "Smart Flow Team"
+  license: "MIT"
+  updated_at: "2026-01-12"
+
+scope:
+  level: "project"
+  priority: 40
+
+compatibility:
+  claude_code_min_version: "2026.01.0"
+  requires_restart: false
 ---
 
 # Auto-Fix - 全自动测试-修复循环系统

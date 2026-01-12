@@ -1,9 +1,56 @@
 ---
 name: browser-mcp-guide
+displayName: "浏览器 MCP 指南"
+version: "1.0.0"
 description: Chrome MCP 浏览器自动化工具使用指南
-category: automation
-tags: [browser, chrome, mcp, automation, testing]
-version: 1.0.0
+
+triggers:
+  keywords:
+    "browser"
+    "mcp"
+    "guide"
+  auto_trigger: false
+  confidence_threshold: 0.6
+
+tools:
+  required:
+    - Read
+    - Write
+  optional:
+    - Bash
+    - Edit
+
+permissions:
+  level: "write"
+  scope:
+    - "file:read"
+    - "file:write"
+
+context:
+  mode: inline
+  isolation: false
+  max_context_tokens: 50000
+
+hot_reload: true
+progressive_load: true
+
+metadata:
+  category: "plugin"
+  tags:
+    "browser"
+    "mcp"
+    "guide"
+  author: "Smart Flow Team"
+  license: "MIT"
+  updated_at: "2026-01-12"
+
+scope:
+  level: "project"
+  priority: 40
+
+compatibility:
+  claude_code_min_version: "2026.01.0"
+  requires_restart: false
 ---
 
 # Browser MCP Guide - Chrome 浏览器自动化指南

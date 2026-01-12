@@ -1,7 +1,54 @@
 ---
 name: db-deploy
+displayName: "数据库部署"
+version: "1.0.0"
 description: 全栈项目自动部署技能。支持 Django 后端、Vue3 前端、MySQL 数据库、Redis 缓存、Nginx 反向代理和 Python 脚本的完整部署流程。当用户请求部署、更新、或维护 Web 项目时使用此技能。支持多仓库配置、GitHub Actions 自动部署、SSL 证书自动配置。
-license: MIT
+
+triggers:
+  keywords:
+    "db"
+    "deploy"
+  auto_trigger: false
+  confidence_threshold: 0.6
+
+tools:
+  required:
+    - Read
+    - Write
+  optional:
+    - Bash
+    - Edit
+
+permissions:
+  level: "write"
+  scope:
+    - "file:read"
+    - "file:write"
+
+context:
+  mode: inline
+  isolation: false
+  max_context_tokens: 50000
+
+hot_reload: true
+progressive_load: true
+
+metadata:
+  category: "deployment"
+  tags:
+    "db"
+    "deploy"
+  author: "Smart Flow Team"
+  license: "MIT"
+  updated_at: "2026-01-12"
+
+scope:
+  level: "project"
+  priority: 40
+
+compatibility:
+  claude_code_min_version: "2026.01.0"
+  requires_restart: false
 ---
 
 # 全栈项目自动部署技能
