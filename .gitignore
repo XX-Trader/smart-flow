@@ -71,3 +71,10 @@ Thumbs.db
 ../superpowers-main/
 claude-code-infrastructure-showcase-main/
 superpowers-main/
+
+# Backup files
+*.backup/
+agents.backup/
+
+# Upgrade scripts (one-time use)
+scripts/upgrade-*.js
