@@ -1,6 +1,65 @@
 ---
 name: parallel-executor
+displayName: "并行执行引擎"
+version: "2.1.0"
 description: "Use when tasks are decomposed and user confirmed configuration. Executes tasks in parallel stages with real-time progress tracking."
+
+triggers:
+  keywords:
+    - "并行执行"
+    - "同时执行"
+    - "批量执行"
+    - "多任务"
+  auto_trigger: false
+  confidence_threshold: 0.8
+
+tools:
+  required:
+    - Task
+    - TaskOutput
+  optional:
+    - AskUserQuestion
+    - TodoWrite
+
+permissions:
+  level: "full"
+  scope:
+    - "file:read"
+    - "file:write"
+    - "agent:dispatch"
+
+context:
+  mode: fork
+  isolation: true
+  max_context_tokens: 150000
+
+hot_reload: true
+progressive_load: true
+
+subagent:
+  max_concurrent: 10
+  timeout: 600000
+  retry_count: 3
+  result_format: "markdown"
+
+metadata:
+  category: "workflow"
+  tags:
+    - "并行执行"
+    - "进度跟踪"
+    - "任务调度"
+  author: "Smart Flow Team"
+  license: "MIT"
+  created_at: "2024-01-07"
+  updated_at: "2026-01-12"
+
+scope:
+  level: "project"
+  priority: 90
+
+compatibility:
+  claude_code_min_version: "2026.01.0"
+  requires_restart: false
 ---
 
 # Parallel Executor - 并行执行引擎

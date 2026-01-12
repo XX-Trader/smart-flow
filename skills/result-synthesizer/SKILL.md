@@ -1,6 +1,56 @@
 ---
 name: result-synthesizer
+displayName: "结果整合器"
+version: "2.1.0"
 description: "Use when all agents have completed execution. Synthesizes all outputs into a comprehensive report, then guides through testing-modification loop until bug-free, then deployment."
+
+triggers:
+  keywords:
+    - "结果整合"
+    - "生成报告"
+    - "综合报告"
+  auto_trigger: false
+  confidence_threshold: 0.8
+
+tools:
+  required:
+    - Write
+  optional:
+    - Task
+    - AskUserQuestion
+
+permissions:
+  level: "write"
+  scope:
+    - "file:read"
+    - "file:write"
+
+context:
+  mode: inline
+  isolation: false
+  max_context_tokens: 100000
+
+hot_reload: true
+progressive_load: true
+
+metadata:
+  category: "workflow"
+  tags:
+    - "结果整合"
+    - "报告生成"
+    - "测试循环"
+  author: "Smart Flow Team"
+  license: "MIT"
+  created_at: "2024-01-07"
+  updated_at: "2026-01-12"
+
+scope:
+  level: "project"
+  priority: 80
+
+compatibility:
+  claude_code_min_version: "2026.01.0"
+  requires_restart: false
 ---
 
 # Result Synthesizer - 结果整合器

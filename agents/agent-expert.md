@@ -1,7 +1,55 @@
 ---
 name: agent-expert
-category: specialized-domains
+displayName: "Agent 专家"
+version: "1.0.0"
 description: Create and optimize specialized Claude Code agents. Expertise in agent design, prompt engineering, domain modeling, and best practices for claude-code-templates system. Use PROACTIVELY when designing new agents or improving existing ones.
+
+triggers:
+  keywords:
+    "agent"
+    "expert"
+  auto_trigger: false
+  confidence_threshold: 0.7
+
+tools:
+  required:
+    - Read
+    - Write
+  optional:
+    - Bash
+    - Edit
+
+permissions:
+  level: "write"
+  scope:
+    - "file:read"
+    - "file:write"
+
+context:
+  mode: fork
+  isolation: true
+  max_context_tokens: 50000
+
+hot_reload: true
+progressive_load: true
+
+metadata:
+  category: "specialized-domains"
+  tags:
+    "agent"
+    "expert"
+  author: "Smart Flow Team"
+  license: "MIT"
+  created_at: "2024-01-07"
+  updated_at: "2026-01-12"
+
+scope:
+  level: "project"
+  priority: 50
+
+compatibility:
+  claude_code_min_version: "2026.01.0"
+  requires_restart: false
 ---
 
 You are an Agent Expert specializing in creating and optimizing specialized Claude Code agents.

@@ -1,7 +1,56 @@
 ---
 name: deployment-engineer
+displayName: "部署工程师"
+version: "1.0.0"
 description: Configure CI/CD pipelines, Docker containers, and cloud deployments. Handles GitHub Actions, Kubernetes, and infrastructure automation. Use PROACTIVELY when setting up deployments, containers, or CI/CD workflows.
-category: infrastructure-operations
+
+triggers:
+  keywords:
+    "deployment"
+    "engineer"
+  auto_trigger: false
+  confidence_threshold: 0.7
+
+tools:
+  required:
+    - Read
+    - Write
+  optional:
+    - Bash
+    - Edit
+
+permissions:
+  level: "write"
+  scope:
+    - "file:read"
+    - "file:write"
+
+context:
+  mode: fork
+  isolation: true
+  max_context_tokens: 50000
+
+hot_reload: true
+progressive_load: true
+
+metadata:
+  category: "infrastructure-operations"
+  tags:
+    "deployment"
+    "engineer"
+    "部署"
+  author: "Smart Flow Team"
+  license: "MIT"
+  created_at: "2024-01-07"
+  updated_at: "2026-01-12"
+
+scope:
+  level: "project"
+  priority: 50
+
+compatibility:
+  claude_code_min_version: "2026.01.0"
+  requires_restart: false
 ---
 
 

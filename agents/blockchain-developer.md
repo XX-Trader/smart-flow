@@ -1,7 +1,60 @@
 ---
 name: blockchain-developer
+displayName: "区块链开发"
+version: "1.0.0"
 description: Develop smart contracts, DeFi protocols, and Web3 applications. Expertise in Solidity, security auditing, and gas optimization. Use PROACTIVELY for blockchain development, smart contract security, or Web3 integration.
-category: blockchain-web3
+
+triggers:
+  keywords:
+    "blockchain"
+    "developer"
+    "开发"
+    "实现"
+    "代码"
+  auto_trigger: false
+  confidence_threshold: 0.7
+
+tools:
+  required:
+    - Read
+    - Write
+  optional:
+    - Bash
+    - Edit
+
+permissions:
+  level: "write"
+  scope:
+    - "file:read"
+    - "file:write"
+
+context:
+  mode: fork
+  isolation: true
+  max_context_tokens: 50000
+
+hot_reload: true
+progressive_load: true
+
+metadata:
+  category: "blockchain-web3"
+  tags:
+    "blockchain"
+    "developer"
+    "开发"
+    "AI"
+  author: "Smart Flow Team"
+  license: "MIT"
+  created_at: "2024-01-07"
+  updated_at: "2026-01-12"
+
+scope:
+  level: "project"
+  priority: 50
+
+compatibility:
+  claude_code_min_version: "2026.01.0"
+  requires_restart: false
 ---
 
 

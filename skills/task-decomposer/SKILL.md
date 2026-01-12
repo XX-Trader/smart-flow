@@ -1,6 +1,54 @@
 ---
 name: task-decomposer
+displayName: "任务分解器"
+version: "2.1.0"
 description: "Use when requirements are clear. Recommends agent combinations and requires user confirmation before execution."
+
+triggers:
+  keywords:
+    - "任务分解"
+    - "Agent选择"
+    - "执行计划"
+  auto_trigger: false
+  confidence_threshold: 0.7
+
+tools:
+  required:
+    - AskUserQuestion
+  optional:
+    - TodoWrite
+
+permissions:
+  level: "read"
+  scope:
+    - "file:read"
+
+context:
+  mode: inline
+  isolation: false
+  max_context_tokens: 50000
+
+hot_reload: true
+progressive_load: true
+
+metadata:
+  category: "workflow"
+  tags:
+    - "任务分解"
+    - "Agent推荐"
+    - "依赖分析"
+  author: "Smart Flow Team"
+  license: "MIT"
+  created_at: "2024-01-07"
+  updated_at: "2026-01-12"
+
+scope:
+  level: "project"
+  priority: 85
+
+compatibility:
+  claude_code_min_version: "2026.01.0"
+  requires_restart: false
 ---
 
 # Task Decomposer - 任务分解器

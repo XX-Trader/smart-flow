@@ -1,6 +1,61 @@
 ---
 name: requirements-clarity
+displayName: "需求澄清"
+version: "2.1.0"
 description: "You MUST use this before any creative work - creating features, building components, adding functionality. Explores user intent and requirements through simple one-at-a-time questions."
+
+triggers:
+  keywords:
+    - "需求"
+    - "功能"
+    - "开发"
+    - "实现"
+    - "新增"
+  patterns:
+    - "(帮我|做个|做一个).{0,50}"
+    - "(需求|功能).{0,30}(不)?明确"
+    - "(大概|可能|应该|像).{0,50}"
+  auto_trigger: true
+  confidence_threshold: 0.6
+
+tools:
+  required:
+    - AskUserQuestion
+  optional:
+    - Read
+    - Bash
+
+permissions:
+  level: "write"
+  scope:
+    - "file:read"
+
+context:
+  mode: inline
+  isolation: false
+  max_context_tokens: 50000
+
+hot_reload: true
+progressive_load: true
+
+metadata:
+  category: "workflow"
+  tags:
+    - "需求分析"
+    - "用户交互"
+    - "问题询问"
+  author: "Smart Flow Team"
+  license: "MIT"
+  created_at: "2024-01-07"
+  updated_at: "2026-01-12"
+
+scope:
+  level: "project"
+  priority: 95
+
+compatibility:
+  claude_code_min_version: "2026.01.0"
+  requires_restart: false
 ---
 
 # Requirements Clarity - 需求澄清

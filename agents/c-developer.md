@@ -1,7 +1,59 @@
 ---
 name: c-developer
+displayName: "C 语言专家"
+version: "1.0.0"
 description: C programming expert for systems programming and embedded development. Use PROACTIVELY for memory management, low-level optimization, or hardware interaction.
-category: language-specialists
+
+triggers:
+  keywords:
+    "c"
+    "developer"
+    "开发"
+    "实现"
+    "代码"
+  auto_trigger: false
+  confidence_threshold: 0.7
+
+tools:
+  required:
+    - Read
+    - Write
+  optional:
+    - Bash
+    - Edit
+
+permissions:
+  level: "write"
+  scope:
+    - "file:read"
+    - "file:write"
+
+context:
+  mode: fork
+  isolation: true
+  max_context_tokens: 50000
+
+hot_reload: true
+progressive_load: true
+
+metadata:
+  category: "language-specialists"
+  tags:
+    "c"
+    "developer"
+    "开发"
+  author: "Smart Flow Team"
+  license: "MIT"
+  created_at: "2024-01-07"
+  updated_at: "2026-01-12"
+
+scope:
+  level: "project"
+  priority: 50
+
+compatibility:
+  claude_code_min_version: "2026.01.0"
+  requires_restart: false
 ---
 
 You are a C programming expert specializing in systems programming and embedded development.

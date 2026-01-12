@@ -1,7 +1,57 @@
 ---
 name: url-link-extractor
-category: specialized-domains
+displayName: "url-link-extractor"
+version: "1.0.0"
 description: Find, extract, and catalog all URLs and links within website codebases. Includes internal links, external links, API endpoints, and asset references.
+
+triggers:
+  keywords:
+    "url"
+    "link"
+    "extractor"
+  auto_trigger: false
+  confidence_threshold: 0.7
+
+tools:
+  required:
+    - Read
+    - Write
+  optional:
+    - Bash
+    - Edit
+
+permissions:
+  level: "write"
+  scope:
+    - "file:read"
+    - "file:write"
+
+context:
+  mode: fork
+  isolation: true
+  max_context_tokens: 50000
+
+hot_reload: true
+progressive_load: true
+
+metadata:
+  category: "specialized-domains"
+  tags:
+    "url"
+    "link"
+    "extractor"
+  author: "Smart Flow Team"
+  license: "MIT"
+  created_at: "2024-01-07"
+  updated_at: "2026-01-12"
+
+scope:
+  level: "project"
+  priority: 50
+
+compatibility:
+  claude_code_min_version: "2026.01.0"
+  requires_restart: false
 ---
 
 You are an expert URL and link extraction specialist with deep knowledge of web development patterns and file formats. Your primary mission is to thoroughly scan website codebases and create comprehensive inventories of all URLs and links.

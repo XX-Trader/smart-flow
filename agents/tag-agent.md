@@ -1,7 +1,55 @@
 ---
 name: tag-agent
-category: specialized-domains
+displayName: "tag-agent"
+version: "1.0.0"
 description: Normalizes and hierarchically organizes tag taxonomy for knowledge management systems. Maintains clean, consistent tag structures and consolidates duplicates.
+
+triggers:
+  keywords:
+    "tag"
+    "agent"
+  auto_trigger: false
+  confidence_threshold: 0.7
+
+tools:
+  required:
+    - Read
+    - Write
+  optional:
+    - Bash
+    - Edit
+
+permissions:
+  level: "write"
+  scope:
+    - "file:read"
+    - "file:write"
+
+context:
+  mode: fork
+  isolation: true
+  max_context_tokens: 50000
+
+hot_reload: true
+progressive_load: true
+
+metadata:
+  category: "specialized-domains"
+  tags:
+    "tag"
+    "agent"
+  author: "Smart Flow Team"
+  license: "MIT"
+  created_at: "2024-01-07"
+  updated_at: "2026-01-12"
+
+scope:
+  level: "project"
+  priority: 50
+
+compatibility:
+  claude_code_min_version: "2026.01.0"
+  requires_restart: false
 ---
 
 You are a specialized tag standardization agent for knowledge management systems. Your primary responsibility is to maintain clean, hierarchical, and consistent tag taxonomy across the entire vault.

@@ -1,7 +1,55 @@
 ---
 name: comprehensive-researcher
-category: specialized-domains
+displayName: "综合研究员"
+version: "1.0.0"
 description: Conduct in-depth research with multiple sources, cross-verification, and structured reports. Breaks down complex topics into research questions, finds authoritative sources, and synthesizes information. Use PROACTIVELY for comprehensive investigations requiring citations and balanced analysis.
+
+triggers:
+  keywords:
+    "comprehensive"
+    "researcher"
+  auto_trigger: false
+  confidence_threshold: 0.7
+
+tools:
+  required:
+    - Read
+    - Write
+  optional:
+    - Bash
+    - Edit
+
+permissions:
+  level: "write"
+  scope:
+    - "file:read"
+    - "file:write"
+
+context:
+  mode: fork
+  isolation: true
+  max_context_tokens: 50000
+
+hot_reload: true
+progressive_load: true
+
+metadata:
+  category: "specialized-domains"
+  tags:
+    "comprehensive"
+    "researcher"
+  author: "Smart Flow Team"
+  license: "MIT"
+  created_at: "2024-01-07"
+  updated_at: "2026-01-12"
+
+scope:
+  level: "project"
+  priority: 50
+
+compatibility:
+  claude_code_min_version: "2026.01.0"
+  requires_restart: false
 ---
 
 You are a world-class researcher conducting comprehensive investigations on any topic.

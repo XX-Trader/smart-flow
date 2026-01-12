@@ -1,6 +1,52 @@
 ---
 name: subagent-driven-development
+displayName: "子代理驱动开发"
+version: "2.1.0"
 description: Use when executing implementation plans with independent tasks in the current session
+
+triggers:
+  keywords:
+    - "子代理"
+    - "并行开发"
+    - "任务分发"
+  auto_trigger: false
+  confidence_threshold: 0.7
+
+tools:
+  required:
+    - Task
+  optional:
+    - Read
+    - Write
+
+permissions:
+  level: "full"
+  scope:
+    - "file:read"
+    - "file:write"
+    - "agent:dispatch"
+
+context:
+  mode: fork
+  isolation: true
+  max_context_tokens: 80000
+
+hot_reload: true
+progressive_load: true
+
+metadata:
+  category: "development"
+  tags:
+    - "子代理"
+    - "代码审查"
+    - "开发流程"
+  author: "Smart Flow Team"
+  license: "MIT"
+  updated_at: "2026-01-12"
+
+scope:
+  level: "project"
+  priority: 70
 ---
 
 # Subagent-Driven Development

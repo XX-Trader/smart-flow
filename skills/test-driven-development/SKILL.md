@@ -1,6 +1,50 @@
 ---
 name: test-driven-development
+displayName: "测试驱动开发"
+version: "2.1.0"
 description: Use when implementing any feature or bugfix, before writing implementation code
+
+triggers:
+  keywords:
+    - "TDD"
+    - "测试驱动"
+    - "先写测试"
+  auto_trigger: false
+  confidence_threshold: 0.7
+
+tools:
+  required:
+    - Write
+  optional:
+    - Bash
+    - Read
+
+permissions:
+  level: "write"
+  scope:
+    - "file:read"
+    - "file:write"
+
+context:
+  mode: inline
+  isolation: false
+
+hot_reload: true
+progressive_load: true
+
+metadata:
+  category: "testing"
+  tags:
+    - "TDD"
+    - "测试"
+    - "开发流程"
+  author: "Smart Flow Team"
+  license: "MIT"
+  updated_at: "2026-01-12"
+
+scope:
+  level: "project"
+  priority: 75
 ---
 
 # Test-Driven Development (TDD)

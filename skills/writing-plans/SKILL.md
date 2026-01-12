@@ -1,6 +1,49 @@
 ---
 name: writing-plans
+displayName: "编写计划"
+version: "2.1.0"
 description: Use when you have a spec or requirements for a multi-step task, before touching code
+
+triggers:
+  keywords:
+    - "编写计划"
+    - "实施计划"
+    - "开发计划"
+  auto_trigger: false
+  confidence_threshold: 0.6
+
+tools:
+  required:
+    - Write
+  optional:
+    - Read
+    - TodoWrite
+
+permissions:
+  level: "write"
+  scope:
+    - "file:read"
+    - "file:write"
+
+context:
+  mode: inline
+  isolation: false
+
+hot_reload: true
+progressive_load: true
+
+metadata:
+  category: "planning"
+  tags:
+    - "计划"
+    - "文档"
+  author: "Smart Flow Team"
+  license: "MIT"
+  updated_at: "2026-01-12"
+
+scope:
+  level: "project"
+  priority: 60
 ---
 
 # Writing Plans

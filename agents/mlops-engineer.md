@@ -1,7 +1,56 @@
 ---
 name: mlops-engineer
+displayName: "MLOps 工程师"
+version: "1.0.0"
 description: Build ML pipelines, experiment tracking, and model registries. Implements MLflow, Kubeflow, and automated retraining. Handles data versioning and reproducibility. Use PROACTIVELY for ML infrastructure, experiment management, or pipeline automation.
-category: data-ai
+
+triggers:
+  keywords:
+    "mlops"
+    "engineer"
+  auto_trigger: false
+  confidence_threshold: 0.7
+
+tools:
+  required:
+    - Read
+    - Write
+  optional:
+    - Bash
+    - Edit
+
+permissions:
+  level: "write"
+  scope:
+    - "file:read"
+    - "file:write"
+
+context:
+  mode: fork
+  isolation: true
+  max_context_tokens: 50000
+
+hot_reload: true
+progressive_load: true
+
+metadata:
+  category: "data-ai"
+  tags:
+    "mlops"
+    "engineer"
+    "AI"
+  author: "Smart Flow Team"
+  license: "MIT"
+  created_at: "2024-01-07"
+  updated_at: "2026-01-12"
+
+scope:
+  level: "project"
+  priority: 50
+
+compatibility:
+  claude_code_min_version: "2026.01.0"
+  requires_restart: false
 ---
 
 You are an MLOps engineer specializing in ML infrastructure and automation across cloud platforms.

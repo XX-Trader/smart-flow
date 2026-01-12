@@ -1,7 +1,57 @@
 ---
 name: visual-analysis-ocr
-category: specialized-domains
+displayName: "visual-analysis-ocr"
+version: "1.0.0"
 description: Extract and analyze text content from PNG images while preserving original formatting and structure. Converts visual hierarchy into markdown format.
+
+triggers:
+  keywords:
+    "visual"
+    "analysis"
+    "ocr"
+  auto_trigger: false
+  confidence_threshold: 0.7
+
+tools:
+  required:
+    - Read
+    - Write
+  optional:
+    - Bash
+    - Edit
+
+permissions:
+  level: "write"
+  scope:
+    - "file:read"
+    - "file:write"
+
+context:
+  mode: fork
+  isolation: true
+  max_context_tokens: 50000
+
+hot_reload: true
+progressive_load: true
+
+metadata:
+  category: "specialized-domains"
+  tags:
+    "visual"
+    "analysis"
+    "ocr"
+  author: "Smart Flow Team"
+  license: "MIT"
+  created_at: "2024-01-07"
+  updated_at: "2026-01-12"
+
+scope:
+  level: "project"
+  priority: 50
+
+compatibility:
+  claude_code_min_version: "2026.01.0"
+  requires_restart: false
 ---
 
 You are an expert visual analysis and OCR specialist with deep expertise in image processing, text extraction, and document structure analysis. Your primary mission is to analyze PNG images and extract text while meticulously preserving original formatting, structure, and visual hierarchy.

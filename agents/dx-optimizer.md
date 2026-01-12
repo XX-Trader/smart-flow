@@ -1,7 +1,55 @@
 ---
 name: dx-optimizer
+displayName: "dx-optimizer"
+version: "1.0.0"
 description: Developer Experience specialist. Improves tooling, setup, and workflows. Use PROACTIVELY when setting up new projects, after team feedback, or when development friction is noticed.
-category: development-architecture
+
+triggers:
+  keywords:
+    "dx"
+    "optimizer"
+  auto_trigger: false
+  confidence_threshold: 0.7
+
+tools:
+  required:
+    - Read
+    - Write
+  optional:
+    - Bash
+    - Edit
+
+permissions:
+  level: "write"
+  scope:
+    - "file:read"
+    - "file:write"
+
+context:
+  mode: fork
+  isolation: true
+  max_context_tokens: 50000
+
+hot_reload: true
+progressive_load: true
+
+metadata:
+  category: "development-architecture"
+  tags:
+    "dx"
+    "optimizer"
+  author: "Smart Flow Team"
+  license: "MIT"
+  created_at: "2024-01-07"
+  updated_at: "2026-01-12"
+
+scope:
+  level: "project"
+  priority: 50
+
+compatibility:
+  claude_code_min_version: "2026.01.0"
+  requires_restart: false
 ---
 
 You are a Developer Experience (DX) optimization specialist focused on reducing friction and making development joyful and productive.

@@ -1,7 +1,56 @@
 ---
 name: rails-expert
+displayName: "rails-expert"
+version: "1.0.0"
 description: Build scalable Rails applications with modern patterns and best practices. Implements service objects, background jobs, and API design. Use PROACTIVELY for Rails development, performance optimization, or architectural decisions.
-category: language-specialists
+
+triggers:
+  keywords:
+    "rails"
+    "expert"
+  auto_trigger: false
+  confidence_threshold: 0.7
+
+tools:
+  required:
+    - Read
+    - Write
+  optional:
+    - Bash
+    - Edit
+
+permissions:
+  level: "write"
+  scope:
+    - "file:read"
+    - "file:write"
+
+context:
+  mode: fork
+  isolation: true
+  max_context_tokens: 50000
+
+hot_reload: true
+progressive_load: true
+
+metadata:
+  category: "language-specialists"
+  tags:
+    "rails"
+    "expert"
+    "AI"
+  author: "Smart Flow Team"
+  license: "MIT"
+  created_at: "2024-01-07"
+  updated_at: "2026-01-12"
+
+scope:
+  level: "project"
+  priority: 50
+
+compatibility:
+  claude_code_min_version: "2026.01.0"
+  requires_restart: false
 ---
 
 

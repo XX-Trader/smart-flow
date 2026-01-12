@@ -1,6 +1,89 @@
 ---
 name: smart-workflow
+displayName: "智能工作流"
+version: "2.1.0"
 description: "Use when user wants to build a feature or start a new project. Automatically orchestrates requirements clarification, task decomposition, parallel agent execution, and result synthesis."
+
+triggers:
+  keywords:
+    - "新增"
+    - "开发"
+    - "实现"
+    - "制作"
+    - "创建"
+    - "build"
+    - "develop"
+    - "implement"
+    - "create"
+    - "feature"
+    - "add"
+    - "make"
+  patterns:
+    - "(帮我|做个|做一个).{0,50}(功能|模块)"
+    - "(新增|开发|实现).{0,30}(功能|接口)"
+    - "(应该|大概|可能|像).{0,50}(实现|做|开发)"
+  auto_trigger: true
+  confidence_threshold: 0.7
+
+tools:
+  required:
+    - Task
+    - AskUserQuestion
+    - TodoWrite
+  optional:
+    - Bash
+    - Read
+    - Write
+
+permissions:
+  level: "full"
+  scope:
+    - "file:read"
+    - "file:write"
+    - "agent:dispatch"
+
+context:
+  mode: fork
+  isolation: true
+  max_context_tokens: 100000
+
+hot_reload: true
+progressive_load: true
+
+hooks:
+  pre_exec: ".claude/hooks/before-workflow.md"
+  post_exec: ".claude/hooks/after-workflow.md"
+
+subagent:
+  max_concurrent: 10
+  timeout: 600000
+  retry_count: 2
+  result_format: "markdown"
+
+metadata:
+  category: "workflow"
+  tags:
+    - "自动化"
+    - "并行执行"
+    - "任务调度"
+    - "开发流程"
+  author: "Smart Flow Team"
+  license: "MIT"
+  created_at: "2024-01-07"
+  updated_at: "2026-01-12"
+
+scope:
+  level: "project"
+  priority: 100
+
+compatibility:
+  claude_code_min_version: "2026.01.0"
+  requires_restart: false
+
+debug:
+  enabled: false
+  log_level: "info"
+  trace_execution: false
 ---
 
 # Smart Workflow - 智能任务调度工作流

@@ -1,6 +1,48 @@
 ---
 name: verification-before-completion
-description: Use when about to claim work is complete, fixed, or passing, before committing or creating PRs - requires running verification commands and confirming output before making any success claims; evidence before assertions always
+displayName: "完成前验证"
+version: "2.1.0"
+description: Use when about to claim work is complete, fixed, or passing, before committing or creating PRs - requires running verification commands and confirming output before making any success claims
+
+triggers:
+  keywords:
+    - "验证"
+    - "测试"
+    - "检查"
+  auto_trigger: false
+  confidence_threshold: 0.6
+
+tools:
+  required:
+    - Bash
+  optional:
+    - Read
+
+permissions:
+  level: "read"
+  scope:
+    - "file:read"
+
+context:
+  mode: inline
+  isolation: false
+
+hot_reload: true
+progressive_load: true
+
+metadata:
+  category: "quality"
+  tags:
+    - "验证"
+    - "测试"
+    - "质量检查"
+  author: "Smart Flow Team"
+  license: "MIT"
+  updated_at: "2026-01-12"
+
+scope:
+  level: "project"
+  priority: 65
 ---
 
 # Verification Before Completion

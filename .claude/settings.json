@@ -1,0 +1,207 @@
+{
+  "$schema": "https://claude.com/schemas/settings/v1",
+  "version": "1.0.0",
+  "lastUpdated": "2026-01-12",
+
+  "project": {
+    "name": "smart-flow",
+    "displayName": "Smart Flow - 智能任务调度工作流",
+    "version": "2.1.0"
+  },
+
+  "permissions": {
+    "defaultLevel": "read",
+    "skillLevels": {
+      "smart-workflow": "full",
+      "parallel-executor": "full",
+      "requirements-clarity": "write",
+      "task-decomposer": "read",
+      "result-synthesizer": "write",
+      "test-driven-development": "write",
+      "subagent-driven-development": "full"
+    },
+    "toolPermissions": {
+      "Task": {
+        "allowed": true,
+        "maxConcurrent": 10,
+        "timeout": 600000
+      },
+      "AskUserQuestion": {
+        "allowed": true,
+        "maxQuestionsPerSession": 20
+      },
+      "TodoWrite": {
+        "allowed": true
+      },
+      "Bash": {
+        "allowed": true,
+        "sandboxMode": true,
+        "allowedCommands": [
+          "git",
+          "npm",
+          "python",
+          "node",
+          "ls",
+          "cat",
+          "grep",
+          "find"
+        ],
+        "blockedCommands": [
+          "rm -rf",
+          "del /s",
+          "format",
+          "shutdown"
+        ]
+      },
+      "Read": {
+        "allowed": true,
+        "maxFileSize": "5MB"
+      },
+      "Write": {
+        "allowed": true,
+        "confirmationRequired": true,
+        "protectedPaths": [
+          ".git",
+          "node_modules",
+          ".env"
+        ]
+      },
+      "Edit": {
+        "allowed": true,
+        "confirmationRequired": false
+      },
+      "WebSearch": {
+        "allowed": true,
+        "maxResults": 20
+      }
+    },
+    "fileAccess": {
+      "allowedPaths": [
+        "./",
+        "./skills",
+        "./agents",
+        "./docs"
+      ],
+      "blockedPaths": [
+        "../",
+        "../../",
+        "~/.ssh",
+        "/etc"
+      ],
+      "maxFileSize": "10MB"
+    },
+    "networkAccess": {
+      "allowed": true,
+      "allowedDomains": [
+        "*.github.com",
+        "*.npmjs.org",
+        "pypi.org"
+      ],
+      "blockedDomains": [
+        "*.malicious.com"
+      ]
+    }
+  },
+
+  "subagent": {
+    "enabled": true,
+    "maxConcurrent": 10,
+    "defaultTimeout": 300000,
+    "maxRetries": 3,
+    "isolationMode": "sandbox",
+    "contextStrategy": "fork",
+    "resultCompression": true
+  },
+
+  "progressiveLoading": {
+    "enabled": true,
+    "loadStrategy": "metadata-first",
+    "cacheEnabled": true,
+    "cacheTTL": 3600000
+  },
+
+  "hotReload": {
+    "enabled": true,
+    "watchPaths": [
+      "./skills",
+      "./agents",
+      ".claude"
+    ],
+    "debounceDelay": 500
+  },
+
+  "lifecycleHooks": {
+    "PreCompact": {
+      "enabled": true,
+      "handler": ".claude/hooks/pre-compact.md"
+    },
+    "SubagentStop": {
+      "enabled": true,
+      "handler": ".claude/hooks/subagent-stop.md"
+    },
+    "PostTask": {
+      "enabled": true,
+      "handler": ".claude/hooks/post-task.md"
+    },
+    "OnError": {
+      "enabled": true,
+      "handler": ".claude/hooks/on-error.md"
+    }
+  },
+
+  "context": {
+    "maxTokens": 200000,
+    "compressionThreshold": 150000,
+    "preserveOnCompact": [
+      "user.requirements",
+      "session.state",
+      "task.results"
+    ]
+  },
+
+  "skills": {
+    "autoDiscovery": true,
+    "searchPaths": [
+      "./skills",
+      "./skills-plugins",
+      "./skills-user"
+    ],
+    "loadOrder": [
+      "project",
+      "user",
+      "enterprise"
+    ],
+    "overrideBehavior": "project-priority"
+  },
+
+  "logging": {
+    "enabled": true,
+    "level": "info",
+    "categories": {
+      "skillLoading": "debug",
+      "subagentDispatch": "info",
+      "execution": "info",
+      "errors": "error"
+    },
+    "output": {
+      "console": true,
+      "file": ".claude/logs/operations.log",
+      "maxFileSize": "5MB",
+      "rotation": "daily"
+    }
+  },
+
+  "debug": {
+    "enabled": false,
+    "traceExecution": false,
+    "verboseOutput": false,
+    "breakOnError": false
+  },
+
+  "ui": {
+    "progressDisplay": "compact",
+    "theme": "auto",
+    "showTimestamps": true,
+    "agentStatus": "detailed"
+  }
+}

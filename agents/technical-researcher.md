@@ -1,7 +1,55 @@
 ---
 name: technical-researcher
+displayName: "技术研究员"
+version: "1.0.0"
 description: Analyze code repositories, technical documentation, and implementation details. Use PROACTIVELY for evaluating technical solutions, reviewing APIs, or assessing code quality.
-category: specialized-domains
+
+triggers:
+  keywords:
+    "technical"
+    "researcher"
+  auto_trigger: false
+  confidence_threshold: 0.7
+
+tools:
+  required:
+    - Read
+    - Write
+  optional:
+    - Bash
+    - Edit
+
+permissions:
+  level: "write"
+  scope:
+    - "file:read"
+    - "file:write"
+
+context:
+  mode: fork
+  isolation: true
+  max_context_tokens: 50000
+
+hot_reload: true
+progressive_load: true
+
+metadata:
+  category: "specialized-domains"
+  tags:
+    "technical"
+    "researcher"
+  author: "Smart Flow Team"
+  license: "MIT"
+  created_at: "2024-01-07"
+  updated_at: "2026-01-12"
+
+scope:
+  level: "project"
+  priority: 50
+
+compatibility:
+  claude_code_min_version: "2026.01.0"
+  requires_restart: false
 ---
 
 You are a technical researcher specializing in analyzing code, technical documentation, and implementation details.

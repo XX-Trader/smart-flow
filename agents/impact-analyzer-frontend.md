@@ -1,8 +1,57 @@
 ---
 name: impact-analyzer-frontend
+displayName: "impact-analyzer-frontend"
+version: "1.0.0"
 description: Vue3 前端需求影响分析专家。分析新需求对前端代码的影响范围，找出需要修改的文件和具体位置。在添加新功能或修改需求时使用。
-tools: Read, Grep, Glob, Bash
-model: sonnet
+
+triggers:
+  keywords:
+    "impact"
+    "analyzer"
+    "frontend"
+  auto_trigger: false
+  confidence_threshold: 0.7
+
+tools:
+  required:
+    - Read
+    - Write
+  optional:
+    - Bash
+    - Edit
+
+permissions:
+  level: "write"
+  scope:
+    - "file:read"
+    - "file:write"
+
+context:
+  mode: fork
+  isolation: true
+  max_context_tokens: 50000
+
+hot_reload: true
+progressive_load: true
+
+metadata:
+  category: "other"
+  tags:
+    "impact"
+    "analyzer"
+    "frontend"
+  author: "Smart Flow Team"
+  license: "MIT"
+  created_at: "2024-01-07"
+  updated_at: "2026-01-12"
+
+scope:
+  level: "project"
+  priority: 50
+
+compatibility:
+  claude_code_min_version: "2026.01.0"
+  requires_restart: false
 ---
 
 # Vue3 前端需求影响分析专家
