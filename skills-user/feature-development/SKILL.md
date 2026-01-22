@@ -6,10 +6,15 @@ description: Django + Vue 全栈功能开发标准化流程。支持需求分析
 
 triggers:
   keywords:
-    "feature"
-    "development"
+    - "feature-development"
+    - "功能开发"
+    - "全栈开发"
+    - "Django+Vue开发"
+    - "开发功能"
+    - "实现功能"
+
   auto_trigger: false
-  confidence_threshold: 0.6
+  confidence_threshold: 0.7
 
 tools:
   required:

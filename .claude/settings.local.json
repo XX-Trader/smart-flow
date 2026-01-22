@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "mcp__chrome_____chrome_get_web_content",
+      "Bash(git add:*)"
+    ]
+  }
+}

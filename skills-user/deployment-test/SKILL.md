@@ -6,10 +6,13 @@ description: 全栈项目部署后自动化测试技能。支持交互式快速�
 
 triggers:
   keywords:
-    "deployment"
-    "test"
+    - "deployment-test"
+    - "部署测试"
+    - "测试部署"
+    - "验收测试"
+
   auto_trigger: false
-  confidence_threshold: 0.6
+  confidence_threshold: 0.7
 
 tools:
   required:

@@ -6,9 +6,14 @@ description: Clarify ambiguous requirements through focused dialogue before impl
 
 triggers:
   keywords:
-    "Requirements Clarity"
+    - "requirements-clarity"
+    - "需求澄清"
+    - "分析需求"
+    - "明确需求"
+    - "需求不明确"
+
   auto_trigger: false
-  confidence_threshold: 0.6
+  confidence_threshold: 0.7
 
 tools:
   required:

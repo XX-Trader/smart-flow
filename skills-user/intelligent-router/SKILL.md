@@ -6,10 +6,13 @@ description: Plugin skill for intelligent-router
 
 triggers:
   keywords:
-    "intelligent"
-    "router"
+    - "intelligent-router"
+    - "智能路由"
+    - "路由分发"
+    - "Agent路由"
+
   auto_trigger: false
-  confidence_threshold: 0.6
+  confidence_threshold: 0.7
 
 tools:
   required:

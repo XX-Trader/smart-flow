@@ -6,10 +6,14 @@ description: Claude Code Agents 索引和管理技能。快速查找、调用和
 
 triggers:
   keywords:
-    "agent"
-    "manager"
+    - "agent-manager"
+    - "Agent管理"
+    - "查找Agent"
+    - "AI代理"
+    - "调用Agent"
+
   auto_trigger: false
-  confidence_threshold: 0.6
+  confidence_threshold: 0.7
 
 tools:
   required:

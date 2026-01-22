@@ -6,11 +6,14 @@ description: GitHub Actions 自托管 Runner 部署和管理技能。自动在�
 
 triggers:
   keywords:
-    "github"
-    "actions"
-    "runner"
+    - "github-actions-runner"
+    - "GitHub Actions Runner"
+    - "自托管Runner"
+    - "配置CI/CD"
+    - "部署Runner"
+
   auto_trigger: false
-  confidence_threshold: 0.6
+  confidence_threshold: 0.7
 
 tools:
   required:

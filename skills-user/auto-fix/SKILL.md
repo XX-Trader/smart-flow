@@ -6,10 +6,13 @@ description: 全自动测试-修复循环系统。自动运行测试、分析问
 
 triggers:
   keywords:
-    "auto"
-    "fix"
+    - "auto-fix"
+    - "自动修复"
+    - "修复测试"
+    - "循环修复"
+
   auto_trigger: false
-  confidence_threshold: 0.6
+  confidence_threshold: 0.7
 
 tools:
   required:

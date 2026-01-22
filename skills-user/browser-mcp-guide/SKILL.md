@@ -6,11 +6,13 @@ description: Chrome MCP 浏览器自动化工具使用指南
 
 triggers:
   keywords:
-    "browser"
-    "mcp"
-    "guide"
+    - "browser-mcp-guide"
+    - "浏览器MCP"
+    - "浏览器自动化"
+    - "Chrome MCP"
+
   auto_trigger: false
-  confidence_threshold: 0.6
+  confidence_threshold: 0.7
 
 tools:
   required:

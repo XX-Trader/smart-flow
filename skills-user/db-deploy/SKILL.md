@@ -6,10 +6,14 @@ description: 全栈项目自动部署技能。支持 Django 后端、Vue3 前端
 
 triggers:
   keywords:
-    "db"
-    "deploy"
+    - "db-deploy"
+    - "数据库部署"
+    - "部署数据库"
+    - "全栈部署"
+    - "Django+Vue部署"
+
   auto_trigger: false
-  confidence_threshold: 0.6
+  confidence_threshold: 0.7
 
 tools:
   required:

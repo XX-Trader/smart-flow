@@ -6,11 +6,14 @@ description: Windows 本地开发环境自动化部署技能。支持 Django/Fas
 
 triggers:
   keywords:
-    "windows"
-    "fullstack"
-    "deploy"
+    - "windows-fullstack-deploy"
+    - "Windows部署"
+    - "本地部署"
+    - "本地环境搭建"
+    - "Windows开发环境"
+
   auto_trigger: false
-  confidence_threshold: 0.6
+  confidence_threshold: 0.7
 
 tools:
   required:
