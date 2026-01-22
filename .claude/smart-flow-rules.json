@@ -137,7 +137,7 @@
       "description": "审查代码架构一致性和最佳实践"
     },
     "web-research-specialist": {
-      "file": "web-research-specialist_showcase.md",
+      "file": "web-research-specialist.md",
       "trigger": "网络搜索|web research|搜索资料|技术调研",
       "description": "创意搜索和深度研究"
     },
@@ -145,6 +145,40 @@
       "file": "documentation-architect_showcase.md",
       "trigger": "生成文档|编写文档|documentation|技术文档",
       "description": "生成全面的技术文档"
+    },
+    "doc-sync-checker": {
+      "skill": "doc-sync-checker",
+      "trigger": "检查文档|文档同步|docs-sync|doc-check|文档是否需要更新|文档是否一致|检查文档状态|验证文档|同步文档|检查API文档|检查接口文档|检查数据库文档|docs|documentation|check docs|sync docs|verify docs|文档维护|文档对齐|文档是否最新|文档和代码同步|代码文档同步|修改了文档|更新了文档|文档检查一下|检查文档和代码|校验文档",
+      "description": "自动检查 API 文档和数据库文档是否需要同步更新"
+    },
+    "code-cleaner": {
+      "file": "agents/code-cleaner.md",
+      "trigger": "清理代码|代码清理|clean code|code cleaner|冗余代码|重复代码|失效代码|版本冲突|obsolete code|deprecated code|dead code|redundant code|duplicate code|version conflict|优化代码|代码优化|optimize code|refactor|重构|精简代码|简化代码|代码瘦身",
+      "description": "检测并删除冗余代码、重复代码、失效逻辑和版本冲突"
+    }
+  },
+
+  "docSyncCheck": {
+    "enabled": true,
+    "autoTriggerOnFileChange": true,
+    "checkOnPostTask": true,
+    "filePatterns": {
+      "api": ["*views*", "*controller*", "*route*", "*handler*", "*/api/*"],
+      "database": ["*model*", "*schema*", "*entity*", "*/models/*", "*/entities/*"],
+      "documentation": ["*.md", "docs/*", "README*", "*API*.md", "*api*.md", "*接口*.md", "*数据库*.md", "*schema*.md"],
+      "frontend_api": ["src/api/*", "*/api.ts", "*/api.js"]
+    },
+    "docsPaths": {
+      "api": ["docs/api", "docs/apis", "docs/API"],
+      "database": ["docs/database", "docs/db", "docs/schema"],
+      "requirements": ["docs/requirements", "docs/需求"]
+    },
+    "promptOnDiscussion": true,
+    "promptMessages": {
+      "apiDoc": "检测到 API 接口变更，是否需要在 docs/ 文件夹编写/更新 API 文档？",
+      "dbDoc": "检测到数据库字段变更，是否需要在 docs/ 文件夹编写/更新数据库文档？",
+      "requirementDoc": "正在讨论需求，是否需要创建需求文档？",
+      "docModified": "检测到文档文件变更，正在检查文档与代码的一致性..."
     }
   },
 

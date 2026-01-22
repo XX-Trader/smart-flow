@@ -1,0 +1,217 @@
+{
+  "version": "1.0.0",
+  "last_updated": "2026-01-21",
+  "description": "代码模式定义 - 用于检测 API 接口和数据库模型",
+
+  "api_patterns": {
+    "python": {
+      "django": {
+        "patterns": [
+          "path\\s*\\(\\s*['\"]([^'\"]+)['\"]",
+          "url\\s*\\(\\s*['\"]([^'\"]+)['\"]",
+          "@api_view\\s*\\(\\s*\\[\\s*['\"](GET|POST|PUT|DELETE|PATCH) ['\"]",
+          "router\\.register\\s*\\(\\s*['\"]([^'\"]+)['\"]"
+        ],
+        "file_patterns": ["*/views.py", "*/urls.py", "*/api/*.py"],
+        "description": "Django REST Framework URL patterns"
+      },
+      "fastapi": {
+        "patterns": [
+          "@app\\.(get|post|put|delete|patch)\\s*\\(\\s*['\"]([^'\"]+)['\"]",
+          "@router\\.(get|post|put|delete|patch)\\s*\\(\\s*['\"]([^'\"]+)['\"]",
+          "app\\.\\w+\\s*\\(\\s*['\"]([^'\"]+)['\"]"
+        ],
+        "file_patterns": ["*/main.py", "*/routers/*.py", "*/api/*.py"],
+        "description": "FastAPI route decorators"
+      },
+      "flask": {
+        "patterns": [
+          "@app\\.route\\s*\\(\\s*['\"]([^'\"]+)['\"]",
+          "@app\\.(get|post|put|delete|patch)\\s*\\(\\s*['\"]([^'\"]+)['\"]",
+          "bp\\.(get|post|put|delete|patch)\\s*\\(\\s*['\"]([^'\"]+)['\"]"
+        ],
+        "file_patterns": ["*/app.py", "*/routes/*.py", "*/views/*.py"],
+        "description": "Flask route decorators"
+      }
+    },
+    "javascript": {
+      "express": {
+        "patterns": [
+          "app\\.(get|post|put|delete|patch)\\s*\\(\\s*['\"]([^'\"]+)['\"]",
+          "router\\.(get|post|put|delete|patch)\\s*\\(\\s*['\"]([^'\"]+)['\"]"
+        ],
+        "file_patterns": ["*/routes/*.js", "*/api/*.js", "server.js"],
+        "description": "Express.js routes"
+      },
+      "nest": {
+        "patterns": [
+          "@Get\\s*\\(\\s*['\"]([^'\"]+)['\"]",
+          "@Post\\s*\\(\\s*['\"]([^'\"]+)['\"]",
+          "@Put\\s*\\(\\s*['\"]([^'\"]+)['\"]",
+          "@Delete\\s*\\(\\s*['\"]([^'\"]+)['\"]"
+        ],
+        "file_patterns": ["*/*.controller.ts", "*/controllers/*.ts"],
+        "description": "NestJS controller decorators"
+      },
+      "nextjs": {
+        "patterns": [
+          "export\\s+async\\s+function\\s+(GET|POST|PUT|DELETE)\\s*\\(",
+          "export\\s+const\\s+(GET|POST|PUT|DELETE)\\s*="
+        ],
+        "file_patterns": ["*/app/api/**/route.ts", "*/app/api/**/route.js"],
+        "description": "Next.js App Router"
+      }
+    },
+    "go": {
+      "gin": {
+        "patterns": [
+          "router\\.(GET|POST|PUT|DELETE|PATCH)\\s*\\(\\s*['\"]([^'\"]+)['\"]",
+          "group\\.(GET|POST|PUT|DELETE|PATCH)\\s*\\(\\s*['\"]([^'\"]+)['\"]"
+        ],
+        "file_patterns": ["*/routes/*.go", "*/handlers/*.go", "main.go"],
+        "description": "Gin framework routes"
+      },
+      "echo": {
+        "patterns": [
+          "e\\.(GET|POST|PUT|DELETE|PATCH)\\s*\\(\\s*['\"]([^'\"]+)['\"]"
+        ],
+        "file_patterns": ["*/routes/*.go", "*/handlers/*.go", "main.go"],
+        "description": "Echo framework routes"
+      }
+    },
+    "java": {
+      "spring": {
+        "patterns": [
+          "@(GetMapping|PostMapping|PutMapping|DeleteMapping|PatchMapping)\\s*\\(\\s*['\"]([^'\"]+)['\"]",
+          "@RequestMapping\\s*\\(\\s*value\\s*=\\s*['\"]([^'\"]+)['\"]"
+        ],
+        "file_patterns": ["*/*Controller.java", "*/controllers/*.java"],
+        "description": "Spring Boot request mappings"
+      }
+    }
+  },
+
+  "db_patterns": {
+    "python": {
+      "django": {
+        "patterns": [
+          "class\\s+(\\w+)\\s*\\(\\s*models\\.Model\\s*\\)",
+          "(\\w+)\\s*=\\s*models\\.(CharField|TextField|IntegerField|BooleanField|DateField|DateTimeField|EmailField|URLField|ForeignKey|ManyToManyField|OneToOneField)\\s*\\("
+        ],
+        "file_patterns": ["*/models.py", "*/models/*.py"],
+        "description": "Django ORM models"
+      },
+      "sqlalchemy": {
+        "patterns": [
+          "class\\s+(\\w+)\\s*\\(\\s*Base\\s*\\)",
+          "(\\w+)\\s*=\\s*Column\\s*\\("
+        ],
+        "file_patterns": ["*/models.py", "*/entities/*.py"],
+        "description": "SQLAlchemy models"
+      }
+    },
+    "javascript": {
+      "prisma": {
+        "patterns": [
+          "model\\s+(\\w+)\\s*\\{",
+          "(\\w+)\\s+(String|Int|Boolean|DateTime|Float|Json)"
+        ],
+        "file_patterns": ["*.prisma"],
+        "description": "Prisma schema"
+      },
+      "mongoose": {
+        "patterns": [
+          "new\\s+Schema\\s*\\(",
+          "(\\w+)\\s*:\\s*\\{\\s*type:\\s*(String|Number|Boolean|Date)"
+        ],
+        "file_patterns": ["*/models/*.js", "*/schemas/*.js"],
+        "description": "Mongoose schemas"
+      },
+      "typeorm": {
+        "patterns": [
+          "@Entity\\s*\\(\\)",
+          "@Column\\s*\\(\\)",
+          "class\\s+(\\w+)"
+        ],
+        "file_patterns": ["*/*.entity.ts", "*/entities/*.ts"],
+        "description": "TypeORM entities"
+      }
+    },
+    "go": {
+      "gorm": {
+        "patterns": [
+          "type\\s+(\\w+)\\s+struct",
+          "(\\w+)\\s+(\\w+)\\s+`gorm"
+        ],
+        "file_patterns": ["*/models/*.go", "*/entities/*.go"],
+        "description": "GORM models"
+      }
+    },
+    "java": {
+      "jpa": {
+        "patterns": [
+          "@Entity\\s*\\(",
+          "@Column\\s*\\(",
+          "public\\s+class\\s+(\\w+)"
+        ],
+        "file_patterns": ["*/*.java", "*/entities/*.java"],
+        "description": "JPA entities"
+      }
+    }
+  },
+
+  "file_type_patterns": {
+    "api_files": [
+      "*views*",
+      "*controller*",
+      "*route*",
+      "*handler*",
+      "*/api/*",
+      "*/routes/*",
+      "*/controllers/*"
+    ],
+    "db_files": [
+      "*model*",
+      "*schema*",
+      "*entity*",
+      "*/models/*",
+      "*/entities/*",
+      "*/schemas/*"
+    ],
+    "documentation_files": [
+      "*.md",
+      "docs/*",
+      "*/docs/*",
+      "README*",
+      "readme*",
+      "*API*.md",
+      "*api*.md",
+      "*接口*.md",
+      "*database*.md",
+      "*数据库*.md",
+      "*schema*.md",
+      "*需求*.md",
+      "*设计*.md"
+    ],
+    "frontend_api_files": [
+      "src/api/*",
+      "*/api.ts",
+      "*/api.js",
+      "*/services/*"
+    ]
+  },
+
+  "ignore_patterns": [
+    "*_test.py",
+    "*_test.js",
+    "*_test.ts",
+    "*_test.go",
+    "*test*.java",
+    "*/migrations/*",
+    "*/node_modules/*",
+    "*/venv/*",
+    "*/__pycache__/*",
+    "*/dist/*",
+    "*/build/*"
+  ]
+}

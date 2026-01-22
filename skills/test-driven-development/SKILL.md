@@ -6,11 +6,43 @@ description: Use when implementing any feature or bugfix, before writing impleme
 
 triggers:
   keywords:
+    # ===== 直接触发 TDD =====
     - "TDD"
     - "测试驱动"
     - "先写测试"
-  auto_trigger: false
-  confidence_threshold: 0.7
+    - "用TDD"
+    - "使用TDD"
+
+    # ===== 覆盖率相关（手动检查）=====
+    - "覆盖率"
+    - "测试覆盖率"
+    - "代码覆盖率"
+    - "覆盖率检查"
+    - "检查覆盖率"
+    - "测试覆盖"
+    - "coverage"
+
+    # ===== 明确要求测试 =====
+    - "写测试"
+    - "写测试用例"
+    - "编写测试"
+    - "需要测试"
+    - "要写测试"
+    - "加上测试"
+    - "补充测试"
+
+    # ===== 测试类型 =====
+    - "单元测试"
+    - "集成测试"
+    - "测试用例"
+
+    # ===== 质量要求 =====
+    - "测试质量"
+    - "高质量代码"
+    - "代码质量"
+
+  auto_trigger: false              # ✅ 完全手动触发，需要用户明确要求
+  confidence_threshold: 0.7       # 触发置信度阈值
 
 tools:
   required:
@@ -56,6 +88,116 @@ Write the test first. Watch it fail. Write minimal code to pass.
 **Core principle:** If you didn't watch the test fail, you don't know if it tests the right thing.
 
 **Violating the letter of the rules is violating the spirit of the rules.**
+
+## How to Trigger This Skill
+
+This skill uses **MANUAL TRIGGER** mode. You must explicitly request it using one of these keywords:
+
+### 🎯 Direct TDD Requests
+```
+"用 TDD 开发用户登录功能"
+"测试驱动开发实现订单接口"
+"先写测试，后写代码"
+```
+
+### 📊 Coverage Check Requests
+```
+"检查覆盖率"
+"测试覆盖率达标了吗？"
+"运行覆盖率检查"
+"查看代码覆盖率"
+```
+
+### ✍️ Test Writing Requests
+```
+"写测试用例"
+"编写单元测试"
+"给这个功能加上测试"
+"补充测试用例"
+```
+
+### 🏆 Quality Requests
+```
+"确保代码质量"
+"需要高质量的测试"
+"测试质量要求"
+```
+
+**What Happens When Triggered:**
+1. ✅ Enforce TDD workflow (Red-Green-Refactor)
+2. ✅ Require 95% coverage for core modules (strategy/, risk/, api/)
+3. ✅ Require 80% coverage for general modules (utils/, infra/, scripts/)
+4. ✅ Update TEST_PROGRESS.md automatically
+5. ✅ Block completion if coverage not met
+
+**Important**: This skill will NOT auto-trigger. You must explicitly request testing or TDD.
+
+## Project-Specific Standards
+
+### 🎯 Quantitative Trading Project Rules
+
+This TDD skill enforces **STRICT** testing standards for quantitative trading projects:
+
+#### 1. Dual Coverage Standards (双标)
+
+| Module Tier | Coverage Threshold | Example Directories | Requirements |
+|-------------|-------------------|---------------------|--------------|
+| **Core (Tier 1)** | **95%** | `src/strategy/`, `src/risk/`, `src/api/` | Must cover ALL if/else branches + exception handling |
+| **General (Tier 2)** | **80%** | `src/utils/`, `src/infra/`, `scripts/` | Core logic flows must be 100% covered |
+
+**RED LINE**: AI MUST NOT mark task complete if coverage below threshold.
+
+**Verification Command**:
+```bash
+npm run test:cov          # Jest/Vitest projects
+pytest --cov=src          # Python projects
+```
+
+#### 2. Test Progress Tracking
+
+**MANDATORY**: Maintain `TEST_PROGRESS.md` in project root.
+
+Update after EVERY feature completion:
+
+**Status Markers**:
+- ✅ = Tested and passed
+- ⏳ = Partially tested (edge cases pending)
+- ❌ = Failed or not tested
+
+**Required Fields**:
+- Module name
+- Sub-feature/API
+- Test status (✅/⏳/❌)
+- Actual coverage percentage
+- Test file path
+- Notes (e.g., "Mock data construction needed")
+
+**Example Entry**:
+```markdown
+### 风险控制 (Risk Control)
+- [✅] 止损逻辑触发 (98%) - `tests/risk/stop-loss.test.ts`
+- [⏳] 极端行情下的滑点模拟 (NA) - 原因：Mock数据构造中
+```
+
+#### 3. Task Closure Requirements
+
+Before ending ANY task:
+
+- [ ] Update `TEST_PROGRESS.md`
+- [ ] Run coverage check: `npm run test:cov` or `pytest --cov`
+- [ ] Verify API docs sync with code
+- [ ] Report current core module coverage in response
+- [ ] Fix any failing tests
+
+**Exception**: Only skip with human partner's explicit permission.
+
+#### 4. Documentation Splitting Rule
+
+**MAX 1000 lines per document**.
+
+When approaching limit:
+- Split by feature (e.g., `API_AUTH.md`, `API_TRADE.md`)
+- Update index with links to sub-docs
 
 ## When to Use
 
@@ -368,6 +510,58 @@ PASS
 **REFACTOR**
 Extract validation for multiple fields if needed.
 
+## Coverage Verification
+
+### Before Marking Complete
+
+**MANDATORY CHECKS**:
+
+1. **Run Coverage Report**:
+   ```bash
+   npm run test:cov          # For TypeScript/JavaScript
+   pytest --cov=src --cov-report=term-missing  # For Python
+   ```
+
+2. **Verify Thresholds**:
+   - Core modules (Tier 1) ≥ 95%
+   - General modules (Tier 2) ≥ 80%
+
+3. **Check Specific Files**:
+   ```bash
+   # Check specific file coverage
+   npm run test:cov -- src/strategy/execution.ts
+   ```
+
+4. **View Uncovered Lines**:
+   ```bash
+   # Show missing line numbers
+   npm run test:cov -- --coverage --verbose
+   ```
+
+**If Below Threshold**:
+- ❌ DO NOT mark task complete
+- ✅ Add tests for uncovered branches
+- ✅ Re-run until达标
+
+### Coverage Report Template
+
+After running tests, report format:
+
+```
+=== Coverage Report ===
+Core Modules (Tier 1):
+  src/strategy/execution.ts:  97% ✅
+  src/risk/stop-loss.ts:      94% ⚠️  (Need +1%)
+  src/api/order.ts:           96% ✅
+
+General Modules (Tier 2):
+  src/utils/date.ts:          85% ✅
+  src/infra/database.ts:      78% ⚠️  (Need +2%)
+
+Overall: 92% (Target: 95% for core, 80% for general)
+Status: ⏳ Pending improvements in risk/stop-loss.ts
+```
+
 ## Verification Checklist
 
 Before marking work complete:
@@ -380,6 +574,9 @@ Before marking work complete:
 - [ ] Output pristine (no errors, warnings)
 - [ ] Tests use real code (mocks only if unavoidable)
 - [ ] Edge cases and errors covered
+- [ ] **Coverage meets threshold**: Core ≥95%, General ≥80%
+- [ ] **TEST_PROGRESS.md updated** with current coverage
+- [ ] **API docs synced** with implementation
 
 Can't check all boxes? You skipped TDD. Start over.
 
@@ -413,3 +610,137 @@ Otherwise → not TDD
 ```
 
 No exceptions without your human partner's permission.
+
+---
+
+## Test Progress Documentation
+
+### TEST_PROGRESS.md Template
+
+Create `TEST_PROGRESS.md` in project root:
+
+```markdown
+# 测试进度跟踪 (Test Progress Tracking)
+
+> **更新时间**: 2026-01-21
+> **覆盖率目标**: 核心模块 95% | 通用模块 80%
+
+---
+
+## 📊 整体覆盖率概览
+
+| 模块类型 | 当前覆盖率 | 目标覆盖率 | 状态 |
+|---------|-----------|-----------|------|
+| 核心模块 (Tier 1) | -- | 95% | ⏳ |
+| 通用模块 (Tier 2) | -- | 80% | ⏳ |
+| **整体项目** | -- | 90% | ⏳ |
+
+---
+
+## 🎯 核心模块 (Tier 1) - 目标: 95%
+
+### 策略执行 (Strategy Execution)
+
+| 功能 | 测试状态 | 覆盖率 | 测试文件 | 备注 |
+|------|---------|--------|---------|------|
+| 订单下单接口 | ✅ 已完成 | -- | `tests/order.test.ts` | 涵盖市价/限价单 |
+| 订单撤单逻辑 | ⏳ 待测试 | -- | - | 需处理网络延迟 |
+| 订单状态查询 | ❌ 未测试 | -- | - | - |
+
+**当前模块覆盖率**: -- %
+
+### 风险控制 (Risk Control)
+
+| 功能 | 测试状态 | 覆盖率 | 测试文件 | 备注 |
+|------|---------|--------|---------|------|
+| 止损逻辑触发 | ⏳ 部分完成 | -- | `tests/risk/stop-loss.test.ts` | 边界条件未覆盖 |
+| 持仓限额检查 | ❌ 未测试 | -- | - | - |
+| 极端行情处理 | ❌ 未测试 | -- | - | 需构造模拟数据 |
+
+**当前模块覆盖率**: -- %
+
+### API 接口 (API Layer)
+
+| 功能 | 测试状态 | 覆盖率 | 测试文件 | 备注 |
+|------|---------|--------|---------|------|
+| 用户认证 | ❌ 未测试 | -- | - | - |
+| 订单管理 | ❌ 未测试 | -- | - | - |
+
+**当前模块覆盖率**: -- %
+
+---
+
+## 🔧 通用模块 (Tier 2) - 目标: 80%
+
+### 数据处理 (Data Processing)
+
+| 功能 | 测试状态 | 覆盖率 | 测试文件 | 备注 |
+|------|---------|--------|---------|------|
+| K线数据清洗 | ❌ 未测试 | -- | - | 需处理空值 |
+| 数据格式转换 | ❌ 未测试 | -- | - | - |
+
+**当前模块覆盖率**: -- %
+
+### 基础设施 (Infrastructure)
+
+| 功能 | 测试状态 | 覆盖率 | 测试文件 | 备注 |
+|------|---------|--------|---------|------|
+| 数据库连接 | ❌ 未测试 | -- | - | - |
+| 日志系统 | ❌ 未测试 | -- | - | - |
+
+**当前模块覆盖率**: -- %
+
+---
+
+## 🚨 待修复问题
+
+| 优先级 | 问题描述 | 影响模块 | 负责人 | 截止日期 |
+|-------|---------|---------|--------|---------|
+| P0 | 止损逻辑边界条件覆盖不足 | risk/stop-loss | - | - |
+
+---
+
+## 📝 更新日志
+
+- **2026-01-21**: 创建测试进度跟踪文档
+
+---
+
+**图例说明**:
+- ✅ = 已完成测试并通过
+- ⏳ = 部分完成或进行中
+- ❌ = 未测试或测试失败
+- -- = 待测量
+```
+
+### How to Use
+
+1. **After Each Feature**:
+   ```bash
+   npm run test:cov
+   # Copy coverage % to relevant section
+   # Update test status (✅/⏳/❌)
+   ```
+
+2. **Before Task Complete**:
+   - Verify all Tier 1 modules ≥ 95%
+   - Verify all Tier 2 modules ≥ 80%
+   - Update "整体覆盖率概览" table
+
+3. **Weekly Review**:
+   - Check "待修复问题" section
+   - Prioritize modules below threshold
+
+### AI Auto-Update Command
+
+When AI completes feature, auto-execute:
+
+```bash
+# Update TEST_PROGRESS.md
+npm run test:cov | tee coverage_report.txt
+# Parse and update markdown
+```
+
+---
+
+**END OF SKILL DOCUMENTATION**
